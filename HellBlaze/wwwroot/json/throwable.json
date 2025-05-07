@@ -1,0 +1,124 @@
+{
+  "throwable": [
+    {
+      "name": "Gas (G-4)",
+      "warbond": "Chemical Agents",
+      "destroys_spawners": true,
+      "fire": 0,
+      "explosive": 0,
+      "smoke": 0,
+      "gas": 1,
+      "anti_tank": 0
+    },
+    {
+      "name": "Frag (G-6)",
+      "warbond": "Base",
+      "destroys_spawners": true,
+      "fire": 0,
+      "explosive": 1,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Impact (G-16)",
+      "warbond": "Base",
+      "destroys_spawners": true,
+      "fire": 0,
+      "explosive": 1,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Incendiary (G-10)",
+      "warbond": "Steeled Veterans",
+      "destroys_spawners": true,
+      "fire": 1,
+      "explosive": 0.2,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Incendiary Impact (G-13)",
+      "warbond": "Polar Patriots",
+      "destroys_spawners": true,
+      "fire": 1,
+      "explosive": 0.2,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Stun (G-23)",
+      "warbond": "Cutting Edge",
+      "destroys_spawners": false,
+      "fire": 0,
+      "explosive": 0,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Thermite (G123)",
+      "warbond": "Democratic Detonation",
+      "destroys_spawners": true,
+      "fire": 0,
+      "explosive": 0.2,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 1
+    },
+    {
+      "name": "Dynamite (TED-63)",
+      "warbond": "Borderline Justice",
+      "destroys_spawners": true,
+      "fire": 0,
+      "explosive": 1,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "High Explosive (G-12)",
+      "warbond": "Base",
+      "destroys_spawners": true,
+      "fire": 0,
+      "explosive": 1,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Seeker (G-50)",
+      "warbond": "Servants of Freedom",
+      "destroys_spawners": false,
+      "fire": 0,
+      "explosive": 1,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Throwing Knife (K-2)",
+      "warbond": "Viper Commandos",
+      "destroys_spawners": false,
+      "fire": 0,
+      "explosive": 0,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0
+    },
+    {
+      "name": "Smoke (G-3)",
+      "warbond": "Base",
+      "destroys_spawners": false,
+      "fire": 0,
+      "explosive": 0,
+      "smoke": 1,
+      "gas": 0,
+      "anti_tank": 0
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "secondary": [
+    {
+      "name": "Grenade Pistol (GP-31)",
+      "ap": 3,
+      "type": "Special",
+      "warbond": "Democratic Detonation",
+      "fire": 0,
+      "explosive": 1,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Ultimatum (GP-31)",
+      "ap": 8,
+      "type": "Special",
+      "warbond": "Servants of Freedom",
+      "fire": 0,
+      "explosive": 1,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Loyalist (PLAS-15)",
+      "ap": 3,
+      "type": "Special",
+      "warbond": "Truth Enforcers",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0.2,
+      "precision": 0
+    },
+    {
+      "name": "Senator (P-4)",
+      "ap": 4,
+      "type": "Pistol",
+      "warbond": "Steeled Veterans",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 1
+    },
+    {
+      "name": "Talon (Las-58)",
+      "ap": 3,
+      "type": "Special",
+      "warbond": "Borderline Justice",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 1,
+      "precision": 1
+    },
+    {
+      "name": "Verdict (P-113)",
+      "ap": 3,
+      "type": "Pistol",
+      "warbond": "Polar Patriots",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Bushwhacker (SG-22)",
+      "ap": 2,
+      "type": "Special",
+      "warbond": "Viper Commandos",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Crisper (P-72)",
+      "ap": 4,
+      "type": "Special",
+      "warbond": "Freedoms Flame",
+      "fire": 1,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Redeemer (P-19)",
+      "ap": 2,
+      "type": "Pistol",
+      "warbond": "Base",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Stun Lance (CQC-19)",
+      "ap": 2,
+      "type": "Melee",
+      "warbond": "Urban Legends",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Combat Hatchet",
+      "ap": 2,
+      "type": "Melee",
+      "warbond": "Servants of Freedom",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Dagger (Las-7)",
+      "ap": 2,
+      "type": "Special",
+      "warbond": "Cutting Edge",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 1,
+      "precision": 0
+    },
+    {
+      "name": "Peacemaker (P-2)",
+      "ap": 2,
+      "type": "Pistol",
+      "warbond": "Base",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Stun Baton (CQC-30)",
+      "ap": 2,
+      "type": "Melee",
+      "warbond": "Super Store",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    },
+    {
+      "name": "Stim Pistol (P-11)",
+      "ap": 0,
+      "type": "Special",
+      "warbond": "Chemical Agents",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0
+    }
+  ]
+}

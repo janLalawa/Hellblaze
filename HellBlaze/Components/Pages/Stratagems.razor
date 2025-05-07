@@ -1,0 +1,40 @@
+@page "/stratagems"
+@using HellBlaze.Models
+@inject GameData GameData
+
+<h3>Stratagems</h3>
+
+@if (_isLoaded)
+{
+    <h2>Stratagems(@(GameData.PrimaryWeapons?.Count ?? 0))</h2>
+    @if (GameData.Stratagems != null)
+    {
+        <ul>
+            <h3>Non-Backpack</h3>
+            @foreach (var stratagem in GameData.Stratagems.Where(s => s.Backpack == false))
+            {
+                <li>@stratagem.Name (@stratagem.Backpack)</li>
+            }
+            <h3>Backpack</h3>
+            @foreach (var stratagem in GameData.Stratagems.Where(s => s.Backpack))
+            {
+                <li>@stratagem.Name (@stratagem.Backpack)</li>
+            }
+        </ul>
+    }
+}
+else
+{
+    <p>Loading weapons data...</p>
+}
+
+@code {
+    private bool _isLoaded;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GameData.EnsureDataLoadedAsync();
+        _isLoaded = true;
+    }
+
+}

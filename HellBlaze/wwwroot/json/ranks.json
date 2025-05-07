@@ -1,0 +1,120 @@
+{
+  "ranks": [
+    {
+      "title": "Cadet",
+      "iconPath": "images/ranks/CadetIcon.svg"
+    },
+    {
+      "title": "Space Cadet",
+      "iconPath": "images/ranks/SpaceCadetIcon.svg"
+    },
+    {
+      "title": "Sergeant",
+      "iconPath": "images/ranks/SergeantIcon.svg"
+    },
+    {
+      "title": "Master Sergeant",
+      "iconPath": "images/ranks/MasterSergeantIcon.svg"
+    },
+    {
+      "title": "Chief",
+      "iconPath": "images/ranks/ChiefIcon.svg"
+    },
+    {
+      "title": "Space Chief Prime",
+      "iconPath": "images/ranks/SpaceChiefPrimeIcon.svg"
+    },
+    {
+      "title": "Death Captain",
+      "iconPath": "images/ranks/DeathCaptainIcon.svg"
+    },
+    {
+      "title": "Marshal",
+      "iconPath": "images/ranks/MarshalIcon.svg"
+    },
+    {
+      "title": "Star Marshal",
+      "iconPath": "images/ranks/StarMarshalIcon.svg"
+    },
+    {
+      "title": "Admiral",
+      "iconPath": "images/ranks/AdmiralIcon.svg"
+    },
+    {
+      "title": "Skull Admiral",
+      "iconPath": "images/ranks/SkullAdmiralIcon.svg"
+    },
+    {
+      "title": "Fleet Admiral",
+      "iconPath": "images/ranks/FleetAdmiralIcon.svg"
+    },
+    {
+      "title": "Admirable Admiral",
+      "iconPath": "images/ranks/AdmirableAdmiralIcon.svg"
+    },
+    {
+      "title": "Commander",
+      "iconPath": "images/ranks/CommanderIcon.svg"
+    },
+    {
+      "title": "Galactic Commander",
+      "iconPath": "images/ranks/GalacticCommanderIcon.svg"
+    },
+    {
+      "title": "Hell Commander",
+      "iconPath": "images/ranks/HellCommanderIcon.svg"
+    },
+    {
+      "title": "General",
+      "iconPath": "images/ranks/GeneralIcon.svg"
+    },
+    {
+      "title": "5-Star General",
+      "iconPath": "images/ranks/5StarGeneralIcon.svg"
+    },
+    {
+      "title": "10-Star General",
+      "iconPath": "images/ranks/10StarGeneralIcon.svg"
+    },
+    {
+      "title": "Private",
+      "iconPath": "images/ranks/PrivateIcon.svg"
+    },
+    {
+      "title": "Super Private",
+      "iconPath": "images/ranks/SuperPrivateIcon.svg"
+    },
+    {
+      "title": "Super Citizen",
+      "iconPath": "images/ranks/SuperCitizenIcon.svg"
+    },
+    {
+      "title": "Viper Commando",
+      "iconPath": "images/ranks/ViperCommandosIcon.svg"
+    },
+    {
+      "title": "Fire Safety Officer",
+      "iconPath": "images/ranks/FireSafetyOfficer.svg"
+    },
+    {
+      "title": "Expert Exterminator",
+      "iconPath": "images/ranks/ExpertExterminator.svg"
+    },
+    {
+      "title": "Free of Thought",
+      "iconPath": "images/ranks/FreeOfThought.svg"
+    },
+    {
+      "title": "Super Pedestrian",
+      "iconPath": "images/ranks/SuperPedestrian.svg"
+    },
+    {
+      "title": "Assault Infantry",
+      "iconPath": "images/ranks/AssaultInfantry.svg"
+    },
+    {
+      "title": "Servant of Freedom",
+      "iconPath": "images/ranks/ServantOfFreedom.svg"
+    }
+  ]
+}

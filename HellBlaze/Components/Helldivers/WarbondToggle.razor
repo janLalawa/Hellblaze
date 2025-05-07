@@ -1,0 +1,29 @@
+@namespace HellBlaze.Components.Helldivers
+
+<MudCard Elevation="0"
+         Outlined
+         Class="ma-0"
+         Style="@($"opacity: {(IsDisabled ? "0.5" : "1.0")}; cursor: pointer; border-radius: 4px; height: 100%;")">
+    <MudCardMedia Image="@ImagePath"
+                  Height="130"
+                  Style="object-fit: cover;"
+                  @onclick="ToggleDisabled"/>
+    <MudCardContent Class="py-1 px-2">
+        <MudText Typo="Typo.body2" Color="@(IsDisabled ? Color.Error : Color.Default)">@WarbondName</MudText>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter] public string WarbondName { get; set; } = string.Empty;
+    [Parameter] public bool IsDisabled { get; set; }
+    [Parameter] public EventCallback<bool> OnToggle { get; set; }
+
+    private string ImagePath => $"warbonds/{WarbondName.ToLower().Replace(" ", "-")}.webp";
+
+    private async Task ToggleDisabled()
+    {
+        IsDisabled = !IsDisabled;
+        await OnToggle.InvokeAsync(IsDisabled);
+    }
+
+}

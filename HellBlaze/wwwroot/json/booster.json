@@ -1,0 +1,109 @@
+{
+  "boosters": [
+    {
+      "name": "Hellpod Space Optimization",
+      "icon": "Hellpod Space Optimization Booster.svg",
+      "description": "Helldivers come out of the Hellpod fully stocked on Ammo, Grenades and Stims.",
+      "warbond": "Base",
+      "price": 15
+    },
+    {
+      "name": "Vitality Enhancement",
+      "icon": "Vitality Enhancement Booster.svg",
+      "description": "Provides minor damage reduction from all sources for all Helldivers",
+      "warbond": "Base",
+      "price": 20
+    },
+    {
+      "name": "UAV Recon Booster",
+      "icon": "UAV Recon Booster Booster.svg",
+      "description": "Increases all Helldivers' effective radar range.",
+      "warbond": "Base",
+      "price": 40
+    },
+    {
+      "name": "Stamina Enhancement",
+      "icon": "Stamina Enhancement Booster.svg",
+      "description": "Increases all Helldivers' stamina capacity and recovery.",
+      "warbond": "Base",
+      "price": 75
+    },
+    {
+      "name": "Muscle Enhancement",
+      "icon": "Muscle Enhancement Booster.svg",
+      "description": "Allows Helldivers to traverse difficult terrain with ease.",
+      "warbond": "Base",
+      "price": 70
+    },
+    {
+      "name": "Increased Reinforcement Budget",
+      "icon": "Increased Reinforcement Budget Booster.svg",
+      "description": "Increases the number of available reinforcements.",
+      "warbond": "Base",
+      "price": 150
+    },
+    {
+      "name": "Flexible Reinforcement Budget",
+      "icon": "Flexible Reinforcement Budget Booster.svg",
+      "description": "Reduces time until new reinforcements are granted once they've been depleted.",
+      "warbond": "Steeled Veterans",
+      "price": 75
+    },
+    {
+      "name": "Localization Confusion",
+      "icon": "Localization Confusion Booster.svg",
+      "description": "Increases the time between enemy encounters.",
+      "warbond": "Cutting Edge",
+      "price": 18
+    },
+    {
+      "name": "Expert Extraction Pilot",
+      "icon": "Expert Extraction Pilot Booster.svg",
+      "description": "Lowers the time it takes for the extraction shuttle to reach the extraction beacon.",
+      "warbond": "Democratic Detonation",
+      "price": 55
+    },
+    {
+      "name": "Motivational Shocks",
+      "icon": "Motivational Shocks Booster.svg",
+      "description": "Allows all Helldivers to recover faster after being slowed by an attack, such as acid. Does not mitigate \"area effects,\" such as EMS strikes.",
+      "warbond": "Polar Patriots",
+      "price": 15
+    },
+    {
+      "name": "Experimental Infusion",
+      "icon": "Experimental Infusion Booster.svg",
+      "description": "In addition to restoring health, Stims temporarily increase movement speed and damage reduction.",
+      "warbond": "Viper Commandos",
+      "price": 80
+    },
+    {
+      "name": "Firebomb Hellpods",
+      "icon": "Firebomb Hellpods Booster.svg",
+      "description": "Lines all Hellpods with volatile incendiaries that detonate upon impact, igniting any units in vicinity of the drop site.",
+      "warbond": "Freedoms Flame",
+      "price": 60
+    },
+    {
+      "name": "Dead Sprint",
+      "icon": "Dead Sprint Booster.svg",
+      "description": "Allows Helldivers to keep sprinting even when they are out of stamina, draining their health instead.",
+      "warbond": "Truth Enforcers",
+      "price": 35
+    },
+    {
+      "name": "Armed Resupply Pods",
+      "icon": "Armed Resupply Pods Booster.svg",
+      "description": "Mounts a modified AR-23 Liberator to all resupply pods, allowing them to double as automatic turrets.",
+      "warbond": "Urban Legends",
+      "price": 55
+    },
+    {
+      "name": "Sample Extricator",
+      "icon": "Sample Extricator Booster.png",
+      "description": "Large enemies now have a chance of dropping Samples on death. Capped at 10 drops per mission.",
+      "warbond": "Borderline Justice",
+      "price": 65
+    }
+  ]
+}

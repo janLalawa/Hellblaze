@@ -1,0 +1,111 @@
+@page "/"
+@using HellBlaze.Components.Helldivers
+@using HellBlaze.Logic
+@using HellBlaze.Models
+@namespace HellBlaze.Components.Pages
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+    <MudCard Class="mb-6 pa-4">
+        <MudGrid Spacing="2">
+            @foreach (var player in State.Players)
+            {
+                <MudItem xs="12" sm="6" md="6" lg="3">
+                    <DiverCard
+                        Diver="@player"
+                        IsReady="@player.IsReady"
+                        OnRemove="@(() => RemovePlayer(player))"
+                        OnReadyStatusChanged="@(value => UpdateReadyStatus(player, value))"/>
+                </MudItem>
+            }
+
+
+            @if (State.Players.Count < 4)
+            {
+                <MudItem xs="12" sm="6" md="6" lg="3">
+                    <MudPaper Class="pa-6 ma-2 d-flex justify-center align-center"
+                              Style="min-height: 250px; cursor: pointer;"
+                              @onclick="AddDiver">
+                        <MudIcon Icon="@Icons.Material.Filled.PersonAdd" Size="Size.Large"/>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+
+        <MudDivider Class="my-6"/>
+
+        <MudGrid Class="mb-4">
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary"
+                           FullWidth="true" Size="Size.Large"
+                           OnClick="RandomizeLoadouts">
+                    RANDOMIZE SQUAD LOADOUTS
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudCard>
+</MudContainer>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+    }
+
+    private void RemovePlayer(Diver player)
+    {
+        State.Players.Remove(player);
+        StateHasChanged();
+    }
+
+    private void UpdateReadyStatus(Diver player, bool isReady)
+    {
+        player.IsReady = isReady;
+        StateHasChanged();
+    }
+
+    private async Task AddDiver()
+    {
+        if (State.Players.Count >= 4)
+            return;
+
+        var randomRank = await RandomRank.GetRandomRankAsync();
+
+        var newPlayer = new Diver
+        {
+            Name = $"Player {State.Players.Count + 1}",
+            Rank = randomRank
+        };
+
+        State.Players.Add(newPlayer);
+        StateHasChanged();
+    }
+
+
+    private void RandomizeLoadouts()
+    {
+        var randomiser = new Randomiser(GameData);
+
+        var testFactors = new Factors
+        {
+            TurretFactor = 5.0m,
+            MaxAllowedDupesStratagems = 2,
+            MustIncludeSupportWeapon = true
+        };
+
+        var kits = randomiser.GetSquadKits(State, testFactors);
+
+        foreach (var (player, kit) in State.Players.Zip(kits))
+        {
+            player.Kit = kit;
+        }
+
+        StateHasChanged();
+    }
+
+
+    [Inject] private IDialogService DialogService { get; set; }
+    [Inject] private ISnackbar Snackbar { get; set; }
+    [Inject] private State State { get; set; }
+    [Inject] private GameData GameData { get; set; }
+    [Inject] private RandomRank RandomRank { get; set; }
+}

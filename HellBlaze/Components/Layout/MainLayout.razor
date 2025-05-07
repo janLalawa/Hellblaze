@@ -1,0 +1,109 @@
+﻿@using HellBlaze.Constants
+@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="HelldiversTheme.Theme"/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudAppBar Elevation="4" Color="Color.Dark" Class="helldivers-appbar">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+                       OnClick="@ToggleDrawer"/>
+        <MudImage Src="images/helldivers-logo.png" Alt="Helldivers 2 Logo" Height="32" Class="ml-2 mr-4"/>
+        <MudText Typo="Typo.h5" Class="helldivers-title">HELLBLAZE - HELLDIVERS 2 RANDOMIZER</MudText>
+        <MudSpacer/>
+        <MudChip T="string" Icon="@Icons.Material.Filled.Flag" Color="Color.Tertiary" Size="Size.Small" Class="mr-2">
+            SUPER EARTH CITIZEN ID: 9821FR33D0M
+        </MudChip>
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="4" ClipMode="DrawerClipMode.Always"
+               Class="helldivers-drawer" Breakpoint="Breakpoint.None">
+        <NavMenu/>
+    </MudDrawer>
+
+    <MudMainContent Class="helldivers-main-content">
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-6">
+            @Body
+        </MudContainer>
+
+        <MudAppBar Bottom="true" Fixed="true" Elevation="0" Class="helldivers-footer" Dense="true">
+            <MudText Typo="Typo.caption" Style="">HELLDIVERS™ 2 RANDOMIZER
+                - FOR
+                DEMOCRACY!
+            </MudText>
+            <MudSpacer/>
+            <MudText Typo="Typo.caption">SUPER EARTH • MANAGED DEMOCRACY</MudText>
+        </MudAppBar>
+    </MudMainContent>
+</MudLayout>
+
+<style>
+    .helldivers-title {
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 2px;
+        font-weight: 700;
+    }
+
+    .helldivers-appbar {
+        background: linear-gradient(180deg, @HelldiversTheme.Colors.DarkBlue 0%, #0a1219 100%);
+        border-bottom: 2px solid @HelldiversTheme.Colors.PrimaryBlueBright;
+    }
+
+    .helldivers-drawer {
+        background: @HelldiversTheme.Colors.Dark;
+        border-right: 1px solid @HelldiversTheme.Colors.PrimaryYellow;
+    }
+
+    .helldivers-main-content {
+        background: #0a0e12;
+        background-blend-mode: overlay;
+    }
+
+    .helldivers-footer {
+        background-color: rgba(13, 26, 38, 0.7);
+        border-top: 1px solid @HelldiversTheme.Colors.PrimaryBlueBright;
+        height: 36px;
+    }
+
+    .mud-drawer-header {
+        background-color: @HelldiversTheme.Colors.Dark !important;
+        border-bottom: 1px solid @HelldiversTheme.Colors.PrimaryYellow !important;
+        min-height: 48px !important;
+    }
+
+
+    .mud-button {
+        border-radius: 2px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        font-weight: 600 !important;
+    }
+
+    .player-1 {
+        color: @HelldiversTheme.Colors.Player1;
+    }
+
+    .player-2 {
+        color: @HelldiversTheme.Colors.Player2;
+    }
+
+    .player-3 {
+        color: @HelldiversTheme.Colors.Player3;
+    }
+
+    .player-4 {
+        color: @HelldiversTheme.Colors.Player4;
+    }
+</style>
+
+@code {
+    private bool _drawerOpen;
+
+    private void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+}

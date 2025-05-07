@@ -1,0 +1,73 @@
+﻿@using HellBlaze.Constants
+<div class="helldivers-nav">
+    <MudText Typo="Typo.subtitle1" Class="px-4 pt-2 nav-header">MISSIONS</MudText>
+
+    <MudNavMenu Color="Color.Primary" Class="mud-width-full my-2" Dense="true">
+        <MudNavLink Href="/" Match="NavLinkMatch.Prefix"
+                    Icon="@Icons.Material.Filled.Group"
+                    IconColor="Color.Primary">
+            SQUAD SETUP
+        </MudNavLink>
+
+        <MudNavLink Href="/weapons" Match="NavLinkMatch.Prefix"
+                    Icon="@Icons.Material.Filled.Inventory2"
+                    IconColor="Color.Primary">
+            ARMORY
+        </MudNavLink>
+
+        <MudNavLink Href="/stratagems" Match="NavLinkMatch.Prefix"
+                    Icon="@Icons.Material.Filled.Bolt"
+                    IconColor="Color.Primary">
+            STRATAGEMS
+        </MudNavLink>
+    </MudNavMenu>
+
+    <MudDivider Class="my-2"/>
+
+    <MudText Typo="Typo.subtitle1" Class="px-4 mt-2 nav-header">INTEL</MudText>
+
+    <MudNavMenu Color="Color.Primary" Class="mud-width-full my-2" Dense="true">
+        <MudNavLink Href="/stats" Match="NavLinkMatch.Prefix"
+                    Icon="@Icons.Material.Filled.Assessment"
+                    IconColor="Color.Primary">
+            STATISTICS
+        </MudNavLink>
+
+        <MudNavLink Href="/settings" Match="NavLinkMatch.Prefix"
+                    Icon="@Icons.Material.Filled.Settings"
+                    IconColor="Color.Primary">
+            SETTINGS
+        </MudNavLink>
+    </MudNavMenu>
+
+    <MudDivider Class="my-2"/>
+
+    <div class="px-4 mt-4 liberty-banner">
+        <MudPaper Elevation="0" Class="pa-2 d-flex align-center"
+                  Style="background-color: rgba(48, 184, 211, 0.1); border: 1px solid #30b8d3;">
+            <MudIcon Icon="@Icons.Material.Filled.Flag" Color="Color.Primary" Size="Size.Small" Class="mr-2"/>
+            <MudText Typo="Typo.caption">FOR DEMOCRACY!</MudText>
+        </MudPaper>
+    </div>
+</div>
+
+<style>
+    .helldivers-nav {
+        height: 100%;
+        background-color: @HelldiversTheme.Colors.Dark;
+    }
+
+    .nav-header {
+        color: @HelldiversTheme.Colors.SecondaryOrange;
+        font-weight: 700;
+        letter-spacing: 1px;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+
+    .liberty-banner {
+        position: absolute;
+        bottom: 80px;
+        width: calc(100% - 32px);
+    }
+</style>

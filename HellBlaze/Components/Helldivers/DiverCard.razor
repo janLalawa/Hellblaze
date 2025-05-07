@@ -1,0 +1,326 @@
+@using HellBlaze.Models
+@namespace HellBlaze.Components.Helldivers
+
+<MudCard Class="mud-elevation-4" Style="position: relative;">
+    <MudIconButton Icon="@Icons.Material.Filled.Close" Color="Color.Error"
+                   @onclick="() => OnRemove.InvokeAsync()"
+                   Style="position: absolute; top: 4px; right: 4px; z-index: 2;"/>
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudImage Src="@(Diver?.Rank?.Icon ?? "images/ranks/CadetIcon.svg")"
+                      ObjectFit="ObjectFit.Cover"
+                      Style="width: 50px; height: 50px; background: transparent;"
+                      Class="rounded-0"/>
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body1" Style="margin: 0;">@(Diver?.Name ?? "Player")</MudText>
+            <MudText Typo="Typo.body2" Style="margin: 0;">@(Diver?.Rank?.Name ?? "Cadet")</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudStack Spacing="3">
+            <MudPaper Elevation="0" Class="pa-3 d-flex flex-column"
+                      Style="background-color: rgba(255, 255, 255, 0.05); min-height: 60px;">
+                <MudText Typo="Typo.caption" Style="font-weight: bold; margin-bottom: 4px;">PRIMARY</MudText>
+                <MudText Typo="Typo.body1" Class="d-flex align-right justify-right"
+                         Style="flex-grow: 1; color: #FFE500;">
+                    @Diver.Kit.Primary.Name
+                </MudText>
+            </MudPaper>
+            <MudPaper Elevation="0" Class="pa-3 d-flex flex-column"
+                      Style="background-color: rgba(255, 255, 255, 0.05); min-height: 60px;">
+                <MudText Typo="Typo.caption" Style="font-weight: bold; margin-bottom: 4px;">SECONDARY</MudText>
+                <MudText Typo="Typo.body1" Class="d-flex align-right justify-right"
+                         Style="flex-grow: 1; color: #FFE500;">
+                    @Diver.Kit.Secondary.Name
+                </MudText>
+            </MudPaper>
+            <MudPaper Elevation="0" Class="pa-3 d-flex flex-column"
+                      Style="background-color: rgba(255, 255, 255, 0.05); min-height: 60px;">
+                <MudText Typo="Typo.caption" Style="font-weight: bold; margin-bottom: 4px;">THROWABLE</MudText>
+                <MudText Typo="Typo.body1" Class="d-flex align-right justify-right"
+                         Style="flex-grow: 1; color: #FFE500;">
+                    @Diver.Kit.Throwable.Name
+                </MudText>
+            </MudPaper>
+            <MudPaper Elevation="0" Class="pa-3 d-flex flex-column"
+                      Style="background-color: rgba(255, 255, 255, 0.05); min-height: 60px;">
+                <MudText Typo="Typo.caption" Style="font-weight: bold; margin-bottom: 4px;">ARMOUR</MudText>
+                <MudText Typo="Typo.body1" Class="d-flex align-right justify-right"
+                         Style="flex-grow: 1; color: #FFE500;">
+                    @Diver.Kit.Armor.Name
+                </MudText>
+            </MudPaper>
+
+            <MudSpacer></MudSpacer>
+
+
+            <MudGrid Spacing="2" Justify="Justify.SpaceBetween">
+                <MudItem Style="width: 20%; min-width: 50px;">
+                    <div @onmouseover="() => ShowTooltip(Diver.Kit.Stratagem1.Name)"
+                         @onmouseout="HideTooltip"
+                         style="position: relative; width: 100%; height: 100%;">
+                        <MudPaper Square="true" Style="aspect-ratio: 1/1; background-color: #222;">
+                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem1.Icon}")"
+                                      Alt="@Diver.Kit.Stratagem1.Name" ObjectFit="ObjectFit.Cover"
+                                      Style="width: 100%; height: 100%;"/>
+                        </MudPaper>
+                        @if (_activeTooltip == Diver.Kit.Stratagem1.Name)
+                        {
+                            <div class="custom-tooltip">@Diver.Kit.Stratagem1.Name</div>
+                        }
+                    </div>
+                </MudItem>
+                <MudItem Style="width: 20%; min-width: 50px;">
+                    <div @onmouseover="() => ShowTooltip(Diver.Kit.Stratagem2.Name)"
+                         @onmouseout="HideTooltip"
+                         style="position: relative; width: 100%; height: 100%;">
+                        <MudPaper Square="true"
+                                  Style="aspect-ratio: 1/1; background-color: #222;">
+                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem2.Icon}")"
+                                      Alt="@Diver.Kit.Stratagem2.Name" ObjectFit="ObjectFit.Cover"
+                                      Style="width: 100%; height: 100%;"/>
+                        </MudPaper>
+                        @if (_activeTooltip == Diver.Kit.Stratagem2.Name)
+                        {
+                            <div class="custom-tooltip">@Diver.Kit.Stratagem2.Name</div>
+                        }
+                    </div>
+                </MudItem>
+                <MudItem Style="width: 20%; min-width: 50px;">
+                    <div @onmouseover="() => ShowTooltip(Diver.Kit.Stratagem3.Name)"
+                         @onmouseout="HideTooltip"
+                         style="position: relative; width: 100%; height: 100%;">
+                        <MudPaper Square="true"
+                                  Style="aspect-ratio: 1/1; background-color: #222;">
+                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem3.Icon}")"
+                                      Alt="@Diver.Kit.Stratagem3.Name" ObjectFit="ObjectFit.Cover"
+                                      Style="width: 100%; height: 100%;"/>
+                        </MudPaper>
+                        @if (_activeTooltip == Diver.Kit.Stratagem3.Name)
+                        {
+                            <div class="custom-tooltip">@Diver.Kit.Stratagem3.Name</div>
+                        }
+                    </div>
+                </MudItem>
+                <MudItem Style="width: 20%; min-width: 50px;">
+                    <div @onmouseover="() => ShowTooltip(Diver.Kit.Stratagem4.Name)"
+                         @onmouseout="HideTooltip"
+                         style="position: relative; width: 100%; height: 100%;">
+                        <MudPaper Square="true"
+                                  Style="aspect-ratio: 1/1; background-color: #222;">
+                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem4.Icon}")"
+                                      Alt="@Diver.Kit.Stratagem4.Name" ObjectFit="ObjectFit.Cover"
+                                      Style="width: 100%; height: 100%;"/>
+                        </MudPaper>
+                        @if (_activeTooltip == Diver.Kit.Stratagem4.Name)
+                        {
+                            <div class="custom-tooltip">@Diver.Kit.Stratagem4.Name</div>
+                        }
+                    </div>
+                </MudItem>
+
+                <MudItem Style="width: 20%; min-width: 50px;">
+                    <div @onmouseover="() => ShowTooltip(Diver.Kit.Booster.Name)"
+                         @onmouseout="HideTooltip"
+                         style="position: relative; width: 100%; height: 100%;">
+                        <MudPaper Square="true"
+                                  Style="aspect-ratio: 1/1; background-color: #222;">
+                            <MudImage Src="@($"boosters/{Diver.Kit.Booster.Icon}")"
+                                      Alt="@Diver.Kit.Booster.Name" ObjectFit="ObjectFit.Cover"
+                                      Style="width: 100%; height: 100%;"/>
+                        </MudPaper>
+                        @if (_activeTooltip == Diver.Kit.Booster.Name)
+                        {
+                            <div class="custom-tooltip">@Diver.Kit.Booster.Name</div>
+                        }
+                    </div>
+                </MudItem>
+
+            </MudGrid>
+
+
+        </MudStack>
+    </MudCardContent>
+
+    <MudCardActions Class="pa-0">
+        <MudButton Variant="Variant.Filled"
+                   Class="@($"hd-ready-button {(IsReady ? "ready" : "not-ready")}")"
+                   OnClick="ToggleReadyStatus"
+                   Style="width: 100%; border-radius: 0; height: 40px; font-weight: bold;">
+            @(IsReady ? "READY" : "NOT READY")
+        </MudButton>
+    </MudCardActions>
+
+    <MudExpansionPanel>
+        <TitleContent>
+            <MudText>Warbond Filters</MudText>
+        </TitleContent>
+        <ChildContent>
+            <MudGrid Spacing="1">
+                @foreach (var warbond in AvailableWarbonds)
+                {
+                    <MudItem xs="4" sm="4" md="4" lg="4" xl="4">
+                        <WarbondToggle
+                            WarbondName="@warbond"
+                            IsDisabled="@Diver.DisabledWarbonds.Contains(warbond)"
+                            OnToggle="@(isDisabled => ToggleWarbond(warbond, isDisabled))"/>
+                    </MudItem>
+                }
+            </MudGrid>
+        </ChildContent>
+    </MudExpansionPanel>
+
+
+</MudCard>
+
+<style>
+    .hd-ready-button {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 2px solid #FFE500;
+    }
+
+    .hd-ready-button.not-ready {
+        background-color: black !important;
+        color: #FFE500 !important;
+    }
+
+    .hd-ready-button.ready {
+        background-color: #FFE500 !important;
+        color: black !important;
+    }
+
+    .hd-ready-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5px,
+            rgba(255, 229, 0, 0.5) 5px,
+            rgba(255, 229, 0, 0.5) 10px
+        );
+        z-index: 1;
+        opacity: 0.3;
+    }
+
+    .hd-ready-button.ready::before {
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5px,
+            rgba(0, 0, 0, 0.5) 5px,
+            rgba(0, 0, 0, 0.5) 10px
+        );
+    }
+
+    .custom-tooltip {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        z-index: 1000;
+    }
+
+
+</style>
+
+@code {
+    [Parameter] public Diver Diver { get; set; } = new() { Rank = new Rank() };
+
+    [Parameter] public bool IsReady { get; set; }
+
+    [Parameter] public EventCallback OnRemove { get; set; }
+
+    [Parameter] public EventCallback<bool> OnReadyStatusChanged { get; set; }
+    [Inject] private GameData GameData { get; set; } = null!;
+
+    private List<string> AvailableWarbonds = new();
+
+    protected override void OnInitialized()
+    {
+        AvailableWarbonds = GetUniqueWarbonds();
+    }
+
+    private List<string> GetUniqueWarbonds()
+    {
+        var warbonds = new HashSet<string>();
+
+        if (GameData.PrimaryWeapons != null)
+            foreach (var item in GameData.PrimaryWeapons)
+                if (!string.IsNullOrEmpty(item.Warbond))
+                    warbonds.Add(item.Warbond);
+
+        if (GameData.SecondaryWeapons != null)
+            foreach (var item in GameData.SecondaryWeapons)
+                if (!string.IsNullOrEmpty(item.Warbond))
+                    warbonds.Add(item.Warbond);
+
+        if (GameData.Throwables != null)
+            foreach (var item in GameData.Throwables)
+                if (!string.IsNullOrEmpty(item.Warbond))
+                    warbonds.Add(item.Warbond);
+
+        if (GameData.Stratagems != null)
+            foreach (var item in GameData.Stratagems)
+                if (!string.IsNullOrEmpty(item.Warbond))
+                    warbonds.Add(item.Warbond);
+
+        if (GameData.Boosters != null)
+            foreach (var item in GameData.Boosters)
+                if (!string.IsNullOrEmpty(item.Warbond))
+                    warbonds.Add(item.Warbond);
+
+        return warbonds.ToList();
+    }
+
+    private void ToggleWarbond(string warbond, bool isDisabled)
+    {
+        if (isDisabled)
+            Diver.DisabledWarbonds.Add(warbond);
+        else
+            Diver.DisabledWarbonds.Remove(warbond);
+    }
+
+
+    private string _activeTooltip;
+
+    private void ShowTooltip(string tooltipText)
+    {
+        _activeTooltip = tooltipText;
+    }
+
+    private void HideTooltip()
+    {
+        _activeTooltip = null;
+    }
+
+
+    private async Task ToggleReadyStatus()
+    {
+        IsReady = !IsReady;
+        if (OnReadyStatusChanged.HasDelegate)
+            await OnReadyStatusChanged.InvokeAsync(IsReady);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+}
