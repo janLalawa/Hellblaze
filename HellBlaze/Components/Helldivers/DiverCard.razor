@@ -1,3 +1,4 @@
+@using HellBlaze.Constants
 @using HellBlaze.Models
 @namespace HellBlaze.Components.Helldivers
 
@@ -5,18 +6,36 @@
     <MudIconButton Icon="@Icons.Material.Filled.Close" Color="Color.Error"
                    @onclick="() => OnRemove.InvokeAsync()"
                    Style="position: absolute; top: 4px; right: 4px; z-index: 2;"/>
-    <MudCardHeader>
+    <MudCardHeader Class="player-header">
         <CardHeaderAvatar>
-            <MudImage Src="@(Diver?.Rank?.Icon ?? "images/ranks/CadetIcon.svg")"
-                      ObjectFit="ObjectFit.Cover"
-                      Style="width: 50px; height: 50px; background: transparent;"
-                      Class="rounded-0"/>
+            <div class="avatar-container">
+                <MudImage Src="@(Diver?.Rank?.Icon ?? "images/ranks/CadetIcon.svg")"
+                          ObjectFit="ObjectFit.Cover"
+                          Style="width: 55px; height: 55px; background: transparent;"
+                          Class="rounded-0"/>
+                <div class="avatar-border" style="background-color: @GetPlayerColor();"></div>
+            </div>
         </CardHeaderAvatar>
         <CardHeaderContent>
-            <MudText Typo="Typo.body1" Style="margin: 0;">@(Diver?.Name ?? "Player")</MudText>
+            <div class="player-name" @onclick="StartEditing">
+                @if (_isEditingName)
+                {
+                    <input @bind="_editName"
+                           @bind:event="oninput"
+                           @onblur="SaveName"
+                           @onkeydown="HandleKeyDown"
+                           @ref="_nameInputReference"
+                           class="player-name-edit"/>
+                }
+                else
+                {
+                    <MudText Typo="Typo.body1" Style="margin: 0;">@(Diver?.Name ?? "Player")</MudText>
+                }
+            </div>
             <MudText Typo="Typo.body2" Style="margin: 0;">@(Diver?.Rank?.Name ?? "Cadet")</MudText>
         </CardHeaderContent>
     </MudCardHeader>
+
 
     <MudCardContent>
         <MudStack Spacing="3">
@@ -237,7 +256,49 @@
         z-index: 1000;
     }
 
+    .player-name {
+        cursor: pointer;
+        display: inline-block;
+    }
 
+    .player-name:hover {
+        background-color: rgba(255, 229, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    .player-name-edit {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(255, 229, 0, 0.6);
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        outline: none;
+    }
+
+    .avatar-container {
+        position: relative;
+        width: 55px;
+        height: 55px;
+        margin-right: 4px;
+    }
+
+    .avatar-border {
+        position: absolute;
+        top: 0;
+        right: -3px;
+        width: 4px;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .player-header {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
 </style>
 
 @code {
@@ -249,8 +310,64 @@
 
     [Parameter] public EventCallback<bool> OnReadyStatusChanged { get; set; }
     [Inject] private GameData GameData { get; set; } = null!;
+    [Inject] private State State { get; set; } = null!;
 
     private List<string> AvailableWarbonds = new();
+    private bool _isEditingName;
+    private string _editName = "";
+    private ElementReference _nameInputReference;
+
+    private void StartEditing()
+    {
+        if (!_isEditingName)
+        {
+            _isEditingName = true;
+            _editName = Diver?.Name ?? "Player";
+            StateHasChanged();
+
+            InvokeAsync(async () => await _nameInputReference.FocusAsync());
+        }
+    }
+
+    private void SaveName()
+    {
+        if (!string.IsNullOrWhiteSpace(_editName) && Diver != null)
+        {
+            Diver.Name = _editName;
+        }
+
+        _isEditingName = false;
+    }
+
+    private string GetPlayerColor()
+    {
+        var playerIndex = -1;
+        playerIndex = State.Players.IndexOf(Diver);
+
+        return playerIndex switch
+        {
+            0 => HelldiversTheme.Colors.Player1,
+            1 => HelldiversTheme.Colors.Player2,
+            2 => HelldiversTheme.Colors.Player3,
+            3 => HelldiversTheme.Colors.Player4,
+            _ => HelldiversTheme.Colors.Player1
+        };
+    }
+
+
+    private void HandleKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            SaveName();
+        }
+        else if (args.Key == "Escape")
+        {
+            _isEditingName = false;
+            StateHasChanged();
+        }
+    }
+
 
     protected override void OnInitialized()
     {

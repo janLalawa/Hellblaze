@@ -2,30 +2,187 @@
 @using HellBlaze.Models
 @inject GameData GameData
 
-<h3>Stratagems</h3>
-
 @if (_isLoaded)
 {
-    <h2>Stratagems(@(GameData.PrimaryWeapons?.Count ?? 0))</h2>
+    <h2>Stratagems (@(GameData.Stratagems?.Count ?? 0))</h2>
     @if (GameData.Stratagems != null)
     {
-        <ul>
-            <h3>Non-Backpack</h3>
-            @foreach (var stratagem in GameData.Stratagems.Where(s => s.Backpack == false))
-            {
-                <li>@stratagem.Name (@stratagem.Backpack)</li>
-            }
-            <h3>Backpack</h3>
-            @foreach (var stratagem in GameData.Stratagems.Where(s => s.Backpack))
-            {
-                <li>@stratagem.Name (@stratagem.Backpack)</li>
-            }
-        </ul>
+        <div class="stratagem-grid">
+            <h3>Non-Backpack Stratagems</h3>
+            <div class="stratagem-container">
+                @foreach (var stratagem in GameData.Stratagems.Where(s => !s.Backpack))
+                {
+                    <div class="stratagem-card">
+                        <div class="stratagem-header">
+                            @if (!string.IsNullOrEmpty(stratagem.Icon))
+                            {
+                                <img src="@($"stratagems/{stratagem.Icon}")" alt="@stratagem.Name icon"
+                                     class="stratagem-icon"/>
+                            }
+                            <h4>@stratagem.Name</h4>
+                        </div>
+                        <div class="stratagem-body">
+                            <p><strong>Category:</strong> @stratagem.Category</p>
+                            <p><strong>Warbond:</strong> @stratagem.Warbond</p>
+                            <p><strong>Support Weapon:</strong> @(stratagem.SupportWeapon ? "Yes" : "No")</p>
+
+                            <div class="stratagem-stats">
+                                <h5>Attributes</h5>
+                                <ul>
+                                    @if (stratagem.Fire > 0)
+                                    {
+                                        <li>Fire: @stratagem.Fire</li>
+                                    }
+                                    @if (stratagem.Explosive > 0)
+                                    {
+                                        <li>Explosive: @stratagem.Explosive</li>
+                                    }
+                                    @if (stratagem.AntiTank > 0)
+                                    {
+                                        <li>Anti-Tank: @stratagem.AntiTank</li>
+                                    }
+                                    @if (stratagem.Laser > 0)
+                                    {
+                                        <li>Laser: @stratagem.Laser</li>
+                                    }
+                                    @if (stratagem.Precision > 0)
+                                    {
+                                        <li>Precision: @stratagem.Precision</li>
+                                    }
+                                    @if (stratagem.Electrical > 0)
+                                    {
+                                        <li>Electrical: @stratagem.Electrical</li>
+                                    }
+                                    @if (stratagem.Gas > 0)
+                                    {
+                                        <li>Gas: @stratagem.Gas</li>
+                                    }
+                                    @if (stratagem.AntiHorde > 0)
+                                    {
+                                        <li>Anti-Horde: @stratagem.AntiHorde</li>
+                                    }
+                                    @if (stratagem.Smoke > 0)
+                                    {
+                                        <li>Smoke: @stratagem.Smoke</li>
+                                    }
+                                    @if (stratagem.Mine > 0)
+                                    {
+                                        <li>Mine: @stratagem.Mine</li>
+                                    }
+                                    @if (stratagem.Turret > 0)
+                                    {
+                                        <li>Turret: @stratagem.Turret</li>
+                                    }
+                                    @if (stratagem.Eagle > 0)
+                                    {
+                                        <li>Eagle: @stratagem.Eagle</li>
+                                    }
+                                    @if (stratagem.Orbital > 0)
+                                    {
+                                        <li>Orbital: @stratagem.Orbital</li>
+                                    }
+                                    @if (stratagem.Support > 0)
+                                    {
+                                        <li>Support: @stratagem.Support</li>
+                                    }
+                                </ul>
+                                <p><strong>Total Weight:</strong> @stratagem.TotalWeight</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <h3>Backpack Stratagems</h3>
+            <div class="stratagem-container">
+                @foreach (var stratagem in GameData.Stratagems.Where(s => s.Backpack))
+                {
+                    <div class="stratagem-card">
+                        <div class="stratagem-header">
+                            @if (!string.IsNullOrEmpty(stratagem.Icon))
+                            {
+                                <img src="@($"stratagems/{stratagem.Icon}")" alt="@stratagem.Name icon"
+                                     class="stratagem-icon"/>
+                            }
+                            <h4>@stratagem.Name</h4>
+                        </div>
+                        <div class="stratagem-body">
+                            <p><strong>Category:</strong> @stratagem.Category</p>
+                            <p><strong>Warbond:</strong> @stratagem.Warbond</p>
+                            <p><strong>Support Weapon:</strong> @(stratagem.SupportWeapon ? "Yes" : "No")</p>
+
+                            <div class="stratagem-stats">
+                                <h5>Combat Attributes</h5>
+                                <ul>
+                                    @if (stratagem.Fire > 0)
+                                    {
+                                        <li>Fire: @stratagem.Fire</li>
+                                    }
+                                    @if (stratagem.Explosive > 0)
+                                    {
+                                        <li>Explosive: @stratagem.Explosive</li>
+                                    }
+                                    @if (stratagem.AntiTank > 0)
+                                    {
+                                        <li>Anti-Tank: @stratagem.AntiTank</li>
+                                    }
+                                    @if (stratagem.Laser > 0)
+                                    {
+                                        <li>Laser: @stratagem.Laser</li>
+                                    }
+                                    @if (stratagem.Precision > 0)
+                                    {
+                                        <li>Precision: @stratagem.Precision</li>
+                                    }
+                                    @if (stratagem.Electrical > 0)
+                                    {
+                                        <li>Electrical: @stratagem.Electrical</li>
+                                    }
+                                    @if (stratagem.Gas > 0)
+                                    {
+                                        <li>Gas: @stratagem.Gas</li>
+                                    }
+                                    @if (stratagem.AntiHorde > 0)
+                                    {
+                                        <li>Anti-Horde: @stratagem.AntiHorde</li>
+                                    }
+                                    @if (stratagem.Smoke > 0)
+                                    {
+                                        <li>Smoke: @stratagem.Smoke</li>
+                                    }
+                                    @if (stratagem.Mine > 0)
+                                    {
+                                        <li>Mine: @stratagem.Mine</li>
+                                    }
+                                    @if (stratagem.Turret > 0)
+                                    {
+                                        <li>Turret: @stratagem.Turret</li>
+                                    }
+                                    @if (stratagem.Eagle > 0)
+                                    {
+                                        <li>Eagle: @stratagem.Eagle</li>
+                                    }
+                                    @if (stratagem.Orbital > 0)
+                                    {
+                                        <li>Orbital: @stratagem.Orbital</li>
+                                    }
+                                    @if (stratagem.Support > 0)
+                                    {
+                                        <li>Support: @stratagem.Support</li>
+                                    }
+                                </ul>
+                                <p><strong>Total Weight:</strong> @stratagem.TotalWeight</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     }
 }
 else
 {
-    <p>Loading weapons data...</p>
+    <p>Loading stratagems data...</p>
 }
 
 @code {
@@ -38,3 +195,59 @@ else
     }
 
 }
+
+<style>
+    .stratagem-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .stratagem-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .stratagem-card {
+        border: 1px solid rgba(255, 229, 0, 0.6);
+        border-radius: 8px;
+        overflow: hidden;
+        width: 300px;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .stratagem-header {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: #192635;
+        color: white;
+    }
+
+    .stratagem-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        object-fit: contain;
+    }
+
+    .stratagem-body {
+        padding: 15px;
+    }
+
+    .stratagem-stats {
+        margin-top: 10px;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+
+    .stratagem-stats ul {
+        list-style-type: none;
+        padding-left: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+</style>

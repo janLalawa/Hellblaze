@@ -1,0 +1,113 @@
+@namespace HellBlaze.Components
+
+<MudCard Class="about-card mb-4">
+    <MudCardContent>
+        <div class="d-flex justify-space-between align-center mb-2">
+            <MudButton Variant="Variant.Text" Color="Color.Default"
+                       Href="@GitHubUrl" Target="_blank" Class="github-link px-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-github">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+            </MudButton>
+        </div>
+
+        <MudText Typo="Typo.body2" Class="mb-2">
+            <p>
+                A loadout randomisation tool for Helldivers 2.
+            </p>
+            <p>
+                Found a bug? report it at
+                <a href="https://github.com/janLalawa/Hellblaze/issues"
+                   target="_blank">github.com/janLalawa/Hellblaze/</a>.
+            </p>
+        </MudText>
+
+        <MudDivider Class="my-2"/>
+
+        <MudText Typo="Typo.caption" Class="mt-2">
+            <strong>Version:</strong> @Version
+        </MudText>
+
+        @if (ShowLatestUpdate)
+        {
+            <MudExpansionPanel Dense="true" Class="mt-2 latest-update-panel" DisableGutters="true">
+                <TitleContent>
+                    <MudText Typo="Typo.caption"><strong>Latest update:</strong> @LatestUpdateDate</MudText>
+                </TitleContent>
+                <ChildContent>
+                    <MudList Dense="true" DisablePadding="true" Class="update-list" T="string">
+                        @foreach (var item in LatestUpdateItems)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.Check" Dense="true" T="string">
+                                <MudText Typo="Typo.caption">@item</MudText>
+                            </MudListItem>
+                        }
+                    </MudList>
+
+                </ChildContent>
+            </MudExpansionPanel>
+        }
+
+        <div class="d-flex justify-center mt-3">
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="/about" Size="Size.Small">
+                Learn More
+            </MudButton>
+        </div>
+    </MudCardContent>
+</MudCard>
+
+<style>
+    .about-card {
+        background-color: rgba(15, 25, 35, 0.9);
+        border: 1px solid rgba(48, 184, 211, 0.4);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .github-link {
+        color: #aaa;
+        transition: color 0.2s ease;
+    }
+
+    .github-link:hover {
+        color: #FFE500;
+    }
+
+    .latest-update-panel :deep(.mud-expand-panel-header) {
+        min-height: unset;
+        padding: 6px 0;
+    }
+
+    .latest-update-panel :deep(.mud-expand-panel-content) {
+        padding: 0 16px 8px 16px;
+    }
+
+    .update-list :deep(.mud-list-item) {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .update-list :deep(.mud-list-item-icon) {
+        color: #FFE500;
+        min-width: 32px;
+    }
+</style>
+
+@code {
+    [Parameter] public string Version { get; set; } = "1.0.0";
+    [Parameter] public string GitHubUrl { get; set; } = "https://github.com/janLalawa/Hellblaze";
+    [Parameter] public bool ShowLatestUpdate { get; set; } = true;
+    [Parameter] public string LatestUpdateDate { get; set; } = "June 15, 2023";
+
+    [Parameter]
+    public List<string> LatestUpdateItems { get; set; } = new()
+    {
+        "Added detailed stratagem and weapon cards",
+        "Improved randomization algorithm",
+        "Fixed warbond filter bugs"
+    };
+
+}

@@ -8,7 +8,7 @@ public class Factors
     public int MaxAllowedDupesStratagems { get; set; } = 0;
     public bool OneBackpack { get; set; } = true;
     public bool OneSupportWeapon { get; set; } = true;
-    public bool MustIncludeSupportWeapon { get; set; } = true;
+    public bool MustIncludeSupportWeapon { get; set; } = false;
     public decimal ExplosiveFactor { get; set; } = 0;
     public decimal FireFactor { get; set; } = 0;
     public decimal AntiTankFactor { get; set; } = 0;
@@ -20,4 +20,7 @@ public class Factors
     public decimal AntiHordeFactor { get; set; } = 0;
     public decimal MineFactor { get; set; } = 0;
     public decimal TurretFactor { get; set; } = 0;
+    public decimal EagleFactor { get; set; } = 0;
+    public decimal OrbitalFactor { get; set; } = 0;
+    public decimal SupportFactor { get; set; } = 0;
 }

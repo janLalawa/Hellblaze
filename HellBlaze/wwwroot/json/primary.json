@@ -64,7 +64,7 @@
       "precision": 0,
       "electrical": 0,
       "laser": 0,
-      "explosive": 0
+      "explosive": 0.3
     },
     {
       "name": "Slugger (SG-8S)",
@@ -196,7 +196,7 @@
       "precision": 0,
       "electrical": 0,
       "laser": 0.2,
-      "explosive": 0
+      "explosive": 0.3
     },
     {
       "name": "Scythe (LAS-5)",
@@ -204,7 +204,7 @@
       "type": "Energy-Based",
       "warbond": "Base",
       "fire": 0.2,
-      "precision": 0,
+      "precision": 1,
       "electrical": 0,
       "laser": 1,
       "explosive": 0
@@ -339,7 +339,7 @@
       "precision": 0,
       "electrical": 0,
       "laser": 0,
-      "explosive": 0
+      "explosive": 0.4
     },
     {
       "name": "Dominator (JAR-5)",

@@ -17,7 +17,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Anti-Materiel Rifle",
@@ -36,7 +39,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Anti-Personnel Minefield",
@@ -55,7 +61,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 1
+      "mine": 1,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Anti-Tank Emplacement",
@@ -73,8 +82,11 @@
       "gas": 0,
       "anti_horde": 0,
       "smoke": 0,
-      "turret": 0,
-      "mine": 1
+      "turret": 0.7,
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Anti-Tank Mines",
@@ -93,7 +105,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 1
+      "mine": 1,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Arc Thrower",
@@ -112,7 +127,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Autocannon Sentry",
@@ -123,15 +141,18 @@
       "warbond": "Base",
       "explosive": 0,
       "fire": 0,
-      "anti_tank": 0,
+      "anti_tank": 0.5,
       "laser": 0,
-      "precision": 0,
+      "precision": 0.3,
       "electrical": 0,
       "gas": 0,
       "anti_horde": 1,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Autocannon",
@@ -150,7 +171,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Ballistic Shield Backpack",
@@ -169,7 +193,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Commando",
@@ -188,7 +215,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0.2
     },
     {
       "name": "Directional Shield",
@@ -207,7 +237,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Eagle 110MM Rocket Pods",
@@ -226,7 +259,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 1,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Eagle 500KG Bomb",
@@ -245,7 +281,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 1,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Eagle Airstrike",
@@ -256,7 +295,7 @@
       "warbond": "Base",
       "explosive": 1,
       "fire": 0,
-      "anti_tank": 0,
+      "anti_tank": 0.4,
       "laser": 0,
       "precision": 0,
       "electrical": 0,
@@ -264,7 +303,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 1,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Eagle Cluster Bomb",
@@ -283,7 +325,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 1,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Eagle Napalm Airstrike",
@@ -302,7 +347,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 1,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Eagle Smoke Strike",
@@ -321,7 +369,10 @@
       "anti_horde": 0,
       "smoke": 1,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 1,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Eagle Strafing Run",
@@ -332,7 +383,7 @@
       "warbond": "Base",
       "explosive": 0,
       "fire": 0,
-      "anti_tank": 0,
+      "anti_tank": 1,
       "laser": 0,
       "precision": 1,
       "electrical": 0,
@@ -340,7 +391,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "EMS Mortar Sentry",
@@ -359,7 +413,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Emancipator Exosuit",
@@ -378,7 +435,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Expendable Anti-Tank",
@@ -397,7 +457,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0.2
     },
     {
       "name": "Fast Recon Vehicle",
@@ -415,8 +478,11 @@
       "gas": 0,
       "anti_horde": 0,
       "smoke": 0,
-      "turret": 0,
-      "mine": 0
+      "turret": 0.3,
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Flame Sentry",
@@ -435,7 +501,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Flamethrower",
@@ -454,7 +523,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Gas Mine",
@@ -473,7 +545,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 1
+      "mine": 1,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Gatling Sentry",
@@ -492,7 +567,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Grenade Launcher",
@@ -503,7 +581,7 @@
       "warbond": "Base",
       "explosive": 1,
       "fire": 0,
-      "anti_tank": 0.2,
+      "anti_tank": 0,
       "laser": 0,
       "precision": 0,
       "electrical": 0,
@@ -511,7 +589,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Grenadier Battlement",
@@ -530,7 +611,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0.7,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0.2
     },
     {
       "name": "Guard Dog",
@@ -548,8 +632,11 @@
       "gas": 0,
       "anti_horde": 1,
       "smoke": 0,
-      "turret": 0,
-      "mine": 0
+      "turret": 0.5,
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Guard Dog Breath",
@@ -564,11 +651,14 @@
       "laser": 0,
       "precision": 0,
       "electrical": 0,
-      "gas": 0,
+      "gas": 1,
       "anti_horde": 1,
       "smoke": 0,
-      "turret": 0,
-      "mine": 0
+      "turret": 0.5,
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0.3
     },
     {
       "name": "Guard Dog Rover",
@@ -586,8 +676,11 @@
       "gas": 0,
       "anti_horde": 1,
       "smoke": 0,
-      "turret": 0,
-      "mine": 0
+      "turret": 0.5,
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "HMG Emplacement",
@@ -598,15 +691,18 @@
       "warbond": "Base",
       "explosive": 0,
       "fire": 0,
-      "anti_tank": 0.4,
+      "anti_tank": 0.8,
       "laser": 0,
-      "precision": 0,
+      "precision": 0.3,
       "electrical": 0,
       "gas": 0,
       "anti_horde": 1,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Heavy Machine Gun",
@@ -617,7 +713,7 @@
       "warbond": "Base",
       "explosive": 0,
       "fire": 0,
-      "anti_tank": 0.4,
+      "anti_tank": 0.5,
       "laser": 0,
       "precision": 0,
       "electrical": 0,
@@ -625,7 +721,10 @@
       "anti_horde": 0.7,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Hellbomb Portable",
@@ -644,7 +743,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Hover Pack",
@@ -663,7 +765,10 @@
       "anti_horde": 0.2,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Incendiary Mines",
@@ -679,10 +784,13 @@
       "precision": 0,
       "electrical": 0,
       "gas": 0,
-      "anti_horde": 0,
+      "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 1
+      "mine": 1,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Jump Pack",
@@ -701,7 +809,10 @@
       "anti_horde": 0.2,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Laser Cannon",
@@ -712,15 +823,18 @@
       "warbond": "Base",
       "explosive": 0,
       "fire": 0,
-      "anti_tank": 1,
+      "anti_tank": 0.5,
       "laser": 1,
       "precision": 1,
       "electrical": 0,
       "gas": 0,
-      "anti_horde": 0,
+      "anti_horde": 0.5,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Machine Gun Sentry",
@@ -739,7 +853,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Machine Gun",
@@ -758,7 +875,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Mortar Sentry",
@@ -777,7 +897,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Orbital 120MM HE Barrage",
@@ -796,7 +919,10 @@
       "anti_horde": 0.6,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital 380MM HE Barrage",
@@ -812,10 +938,13 @@
       "precision": 0,
       "electrical": 0,
       "gas": 0,
-      "anti_horde": 0.2,
+      "anti_horde": 0.5,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Airburst Strike",
@@ -834,7 +963,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital EMS Strike",
@@ -850,10 +982,13 @@
       "precision": 0,
       "electrical": 1,
       "gas": 0,
-      "anti_horde": 0,
+      "anti_horde": 0.4,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 1
     },
     {
       "name": "Orbital Gas Strike",
@@ -872,7 +1007,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Gatling Barrage",
@@ -885,13 +1023,16 @@
       "fire": 0,
       "anti_tank": 0.8,
       "laser": 0,
-      "precision": 0,
+      "precision": 0.4,
       "electrical": 0,
       "gas": 0,
       "anti_horde": 0.8,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Laser",
@@ -904,13 +1045,16 @@
       "fire": 0,
       "anti_tank": 1,
       "laser": 1,
-      "precision": 1,
+      "precision": 0.7,
       "electrical": 0,
       "gas": 0,
       "anti_horde": 0.2,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Napalm Barrage",
@@ -929,7 +1073,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Precision Strike",
@@ -948,7 +1095,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Railcannon Strike",
@@ -967,7 +1117,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Orbital Smoke Strike",
@@ -986,7 +1139,10 @@
       "anti_horde": 0,
       "smoke": 1,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 1
     },
     {
       "name": "Orbital Walking Barrage",
@@ -1002,10 +1158,13 @@
       "precision": 0.1,
       "electrical": 0,
       "gas": 0,
-      "anti_horde": 0,
+      "anti_horde": 0.5,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 1,
+      "support": 0
     },
     {
       "name": "Patriot Exosuit",
@@ -1024,7 +1183,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Quasar Cannon",
@@ -1043,7 +1205,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Railgun",
@@ -1062,7 +1227,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Recoilless Rifle",
@@ -1075,13 +1243,16 @@
       "fire": 0,
       "anti_tank": 1,
       "laser": 0,
-      "precision": 0,
+      "precision": 0.2,
       "electrical": 0,
       "gas": 0,
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Rocket Sentry",
@@ -1100,7 +1271,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 1,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Shield Generator Pack",
@@ -1119,7 +1293,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Shield Generator Relay",
@@ -1138,7 +1315,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Spear",
@@ -1157,7 +1337,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "StA-X3 W.A.S.P. Launcher",
@@ -1176,7 +1359,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Stalwart",
@@ -1195,7 +1381,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     },
     {
       "name": "Sterilizer",
@@ -1214,7 +1403,10 @@
       "anti_horde": 1,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0.3
     },
     {
       "name": "Supply Pack",
@@ -1233,7 +1425,10 @@
       "anti_horde": 0,
       "smoke": 0,
       "turret": 0,
-      "mine": 0
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 1
     },
     {
       "name": "Tesla Tower",
@@ -1251,8 +1446,11 @@
       "gas": 0,
       "anti_horde": 1,
       "smoke": 0,
-      "turret": 0,
-      "mine": 0
+      "turret": 1,
+      "mine": 0,
+      "eagle": 0,
+      "orbital": 0,
+      "support": 0
     }
   ]
 }

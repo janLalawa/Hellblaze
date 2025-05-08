@@ -1,0 +1,55 @@
+<MudPaper Class="pa-3 mb-4 challenge-button" @onclick="ActivateChallenge">
+    <div class="d-flex align-center justify-space-between">
+        <div>
+            <MudText Typo="Typo.h6" Color="Color.Secondary">CHALLENGE OF THE DAY</MudText>
+            <MudText Typo="Typo.caption">New challenge in: @CountdownDisplay</MudText>
+        </div>
+        <MudIcon Icon="@Icons.Material.Filled.Star" Color="Color.Secondary" Size="Size.Large"/>
+    </div>
+</MudPaper>
+
+@code {
+    [Parameter] public EventCallback OnChallengeActivated { get; set; }
+
+    private string CountdownDisplay => GetTimeUntilEndOfDayUTC();
+    private Timer? _timer;
+
+    protected override void OnInitialized()
+    {
+        _timer = new Timer(_ => { InvokeAsync(StateHasChanged); }, null, 0, 1000);
+    }
+
+    private string GetTimeUntilEndOfDayUTC()
+    {
+        var now = DateTime.UtcNow;
+        var endOfDay = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, DateTimeKind.Utc).AddSeconds(1);
+        var timeRemaining = endOfDay - now;
+
+        return $"{timeRemaining.Hours:D2}:{timeRemaining.Minutes:D2}:{timeRemaining.Seconds:D2}";
+    }
+
+    private async Task ActivateChallenge()
+    {
+        await OnChallengeActivated.InvokeAsync();
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+
+}
+
+<style>
+    .challenge-button {
+        background-color: rgba(48, 184, 211, 0.1);
+        border: 1px solid rgba(255, 229, 0, 0.8);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .challenge-button:hover {
+        background-color: rgba(48, 184, 211, 0.2);
+        transform: scale(1.01);
+    }
+</style>

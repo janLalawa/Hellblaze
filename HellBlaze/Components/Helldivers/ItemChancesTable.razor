@@ -1,0 +1,271 @@
+@using HellBlaze.Models
+<MudPaper Class="pa-4 mb-4 item-chances-container">
+    <MudText Typo="Typo.h6" Class="mb-3">Item Selection Chances</MudText>
+
+    <MudTable Items="@ItemChances" Dense="true" Hover="true" Bordered="true" Striped="true" Class="chances-table">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Attributes</MudTh>
+            <MudTh>Base Weight</MudTh>
+            <MudTh>Effective Weight</MudTh>
+            <MudTh>Selection Chance</MudTh>
+        </HeaderContent>
+        <RowTemplate Context="item">
+            <MudTd>@item.Name</MudTd>
+            <MudTd>
+                @foreach (var attr in item.Attributes)
+                {
+                    <MudChip T="string" Color="GetColorForAttribute(attr.Key)" Size="Size.Small" Class="mr-1 mb-1">
+                        @attr.Key: @attr.Value.ToString("F1")
+                    </MudChip>
+                }
+            </MudTd>
+            <MudTd>@item.BaseWeight.ToString("F1")</MudTd>
+            <MudTd>@item.EffectiveWeight.ToString("F1")</MudTd>
+            <MudTd>@item.SelectionChance.ToString("F2")%</MudTd>
+        </RowTemplate>
+        <FooterContent>
+            <MudTd>Total</MudTd>
+            <MudTd>-</MudTd>
+            <MudTd>@TotalBaseWeight.ToString("F1")</MudTd>
+            <MudTd>@TotalEffectiveWeight.ToString("F1")</MudTd>
+            <MudTd>100%</MudTd>
+        </FooterContent>
+    </MudTable>
+
+    <MudText Typo="Typo.body2" Class="mt-3 total-weight">
+        Base Factor: <span class="font-weight-bold">@CurrentFactors.BaseFactor.ToString("F1")</span> |
+        Items: <span class="font-weight-bold">@ItemChances.Count</span>
+    </MudText>
+</MudPaper>
+
+<style>
+    .item-chances-container {
+        background-color: rgba(10, 20, 30, 0.7) !important;
+        border: 1px solid rgba(48, 184, 211, 0.4) !important;
+        border-radius: 8px !important;
+        backdrop-filter: blur(5px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .item-chances-container:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 80%);
+        pointer-events: none;
+    }
+
+    .item-chances-container .mud-typography-h6 {
+        color: #FFE500;
+        text-shadow: 0 0 5px rgba(255, 229, 0, 0.5);
+        text-align: center;
+        font-weight: bold;
+        font-family: 'Orbitron', sans-serif !important;
+    }
+
+    .chances-table {
+        background-color: transparent !important;
+        overflow: hidden;
+    }
+
+    .chances-table .mud-table-container {
+        background-color: transparent !important;
+    }
+
+    .chances-table .mud-table-header {
+        background-color: rgba(15, 25, 35, 0.8) !important;
+    }
+
+    .chances-table .mud-table-head {
+        color: #FFE500 !important;
+        font-family: 'Orbitron', sans-serif !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        font-size: 0.8rem;
+    }
+
+    .chances-table .mud-table-foot {
+        background-color: rgba(15, 25, 35, 0.8) !important;
+        color: #30b8d3 !important;
+        font-weight: bold;
+        font-family: 'Orbitron', sans-serif !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+
+    .chances-table .mud-table-body .mud-table-row:nth-child(odd) {
+        background-color: rgba(15, 25, 35, 0.5) !important;
+    }
+
+    .chances-table .mud-table-body .mud-table-row:nth-child(even) {
+        background-color: rgba(25, 35, 45, 0.5) !important;
+    }
+
+    .chances-table .mud-table-cell {
+        color: rgba(255, 255, 255, 0.9);
+        padding: 8px 16px;
+        font-family: 'Orbitron', sans-serif !important;
+        border-color: rgba(48, 184, 211, 0.2) !important;
+    }
+
+    .total-weight {
+        color: #30b8d3;
+        font-family: 'Orbitron', sans-serif !important;
+        text-align: right;
+        padding-right: 16px;
+    }
+</style>
+
+@code {
+    [Parameter] public IEnumerable<object> Items { get; set; } = new List<object>();
+
+    [Parameter] public Factors CurrentFactors { get; set; } = new();
+
+    private List<ItemChanceInfo> ItemChances { get; set; } = new();
+    private decimal TotalBaseWeight { get; set; }
+    private decimal TotalEffectiveWeight { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        ItemChances.Clear();
+        TotalBaseWeight = 0;
+        TotalEffectiveWeight = 0;
+
+        foreach (var item in Items)
+        {
+            var itemInfo = new ItemChanceInfo();
+
+            switch (item)
+            {
+                case Stratagem stratagem:
+                    itemInfo.Name = stratagem.Name;
+                    AddAttributeIfNonZero(itemInfo, "Explosive", stratagem.Explosive, CurrentFactors.ExplosiveFactor);
+                    AddAttributeIfNonZero(itemInfo, "Fire", stratagem.Fire, CurrentFactors.FireFactor);
+                    AddAttributeIfNonZero(itemInfo, "Anti-Tank", stratagem.AntiTank, CurrentFactors.AntiTankFactor);
+                    AddAttributeIfNonZero(itemInfo, "Laser", stratagem.Laser, CurrentFactors.LaserFactor);
+                    AddAttributeIfNonZero(itemInfo, "Precision", stratagem.Precision, CurrentFactors.PrecisionFactor);
+                    AddAttributeIfNonZero(itemInfo, "Electrical", stratagem.Electrical, CurrentFactors.ElectricalFactor);
+                    AddAttributeIfNonZero(itemInfo, "Gas", stratagem.Gas, CurrentFactors.GasFactor);
+                    AddAttributeIfNonZero(itemInfo, "Anti-Horde", stratagem.AntiHorde, CurrentFactors.AntiHordeFactor);
+                    AddAttributeIfNonZero(itemInfo, "Smoke", stratagem.Smoke, CurrentFactors.SmokeFactor);
+                    AddAttributeIfNonZero(itemInfo, "Mine", stratagem.Mine, CurrentFactors.MineFactor);
+                    AddAttributeIfNonZero(itemInfo, "Turret", stratagem.Turret, CurrentFactors.TurretFactor);
+                    AddAttributeIfNonZero(itemInfo, "Eagle", stratagem.Eagle, CurrentFactors.EagleFactor);
+                    AddAttributeIfNonZero(itemInfo, "Orbital", stratagem.Orbital, CurrentFactors.OrbitalFactor);
+                    AddAttributeIfNonZero(itemInfo, "Support", stratagem.Support, CurrentFactors.SupportFactor);
+                    break;
+                case Weapon weapon:
+                    itemInfo.Name = weapon.Name;
+                    AddAttributeIfNonZero(itemInfo, "Fire", weapon.Fire, CurrentFactors.FireFactor);
+                    AddAttributeIfNonZero(itemInfo, "Precision", weapon.Precision, CurrentFactors.PrecisionFactor);
+                    AddAttributeIfNonZero(itemInfo, "Electrical", weapon.Electrical, CurrentFactors.ElectricalFactor);
+                    AddAttributeIfNonZero(itemInfo, "Laser", weapon.Laser, CurrentFactors.LaserFactor);
+                    AddAttributeIfNonZero(itemInfo, "Explosive", weapon.Explosive, CurrentFactors.ExplosiveFactor);
+                    AddAttributeIfNonZero(itemInfo, "Anti-Tank", weapon.AntiTank, CurrentFactors.AntiTankFactor);
+                    AddAttributeIfNonZero(itemInfo, "Gas", weapon.Gas, CurrentFactors.GasFactor);
+                    AddAttributeIfNonZero(itemInfo, "Smoke", weapon.Smoke, CurrentFactors.SmokeFactor);
+                    AddAttributeIfNonZero(itemInfo, "Anti-Horde", weapon.AntiHorde, CurrentFactors.AntiHordeFactor);
+                    AddAttributeIfNonZero(itemInfo, "Support", weapon.Support, CurrentFactors.SupportFactor);
+                    break;
+                case Throwable throwable:
+                    itemInfo.Name = throwable.Name;
+                    AddAttributeIfNonZero(itemInfo, "Fire", throwable.Fire, CurrentFactors.FireFactor);
+                    AddAttributeIfNonZero(itemInfo, "Explosive", throwable.Explosive, CurrentFactors.ExplosiveFactor);
+                    AddAttributeIfNonZero(itemInfo, "Smoke", throwable.Smoke, CurrentFactors.SmokeFactor);
+                    AddAttributeIfNonZero(itemInfo, "Gas", throwable.Gas, CurrentFactors.GasFactor);
+                    AddAttributeIfNonZero(itemInfo, "Anti-Tank", throwable.AntiTank, CurrentFactors.AntiTankFactor);
+                    AddAttributeIfNonZero(itemInfo, "Laser", throwable.Laser, CurrentFactors.LaserFactor);
+                    AddAttributeIfNonZero(itemInfo, "Precision", throwable.Precision, CurrentFactors.PrecisionFactor);
+                    AddAttributeIfNonZero(itemInfo, "Electrical", throwable.Electrical, CurrentFactors.ElectricalFactor);
+                    AddAttributeIfNonZero(itemInfo, "Anti-Horde", throwable.AntiHorde, CurrentFactors.AntiHordeFactor);
+                    AddAttributeIfNonZero(itemInfo, "Support", throwable.Support, CurrentFactors.SupportFactor);
+                    break;
+            }
+
+            itemInfo.BaseWeight = itemInfo.Attributes.Sum(a => a.Value);
+            itemInfo.EffectiveWeight = itemInfo.Attributes.Sum(a => a.Value * GetMultiplierForAttribute(a.Key)) + CurrentFactors.BaseFactor;
+
+            if (itemInfo.BaseWeight <= 0) continue;
+            ItemChances.Add(itemInfo);
+            TotalBaseWeight += itemInfo.BaseWeight;
+            TotalEffectiveWeight += itemInfo.EffectiveWeight;
+        }
+
+        if (TotalEffectiveWeight > 0)
+        {
+            foreach (var item in ItemChances)
+            {
+                item.SelectionChance = item.EffectiveWeight / TotalEffectiveWeight * 100;
+            }
+        }
+
+        ItemChances = ItemChances.OrderByDescending(i => i.SelectionChance).ToList();
+    }
+
+    private void AddAttributeIfNonZero(ItemChanceInfo item, string name, decimal value, decimal multiplier)
+    {
+        if (value > 0)
+        {
+            item.Attributes[name] = value;
+        }
+    }
+
+    private decimal GetMultiplierForAttribute(string attribute)
+    {
+        return attribute switch
+        {
+            "Explosive" => CurrentFactors.ExplosiveFactor,
+            "Fire" => CurrentFactors.FireFactor,
+            "Anti-Tank" => CurrentFactors.AntiTankFactor,
+            "Laser" => CurrentFactors.LaserFactor,
+            "Precision" => CurrentFactors.PrecisionFactor,
+            "Electrical" => CurrentFactors.ElectricalFactor,
+            "Gas" => CurrentFactors.GasFactor,
+            "Anti-Horde" => CurrentFactors.AntiHordeFactor,
+            "Smoke" => CurrentFactors.SmokeFactor,
+            "Mine" => CurrentFactors.MineFactor,
+            "Turret" => CurrentFactors.TurretFactor,
+            "Eagle" => CurrentFactors.EagleFactor,
+            "Orbital" => CurrentFactors.OrbitalFactor,
+            "Support" => CurrentFactors.SupportFactor,
+            _ => 1.0m
+        };
+    }
+
+    private Color GetColorForAttribute(string attribute)
+    {
+        return attribute switch
+        {
+            "Explosive" => Color.Error,
+            "Fire" => Color.Warning,
+            "Anti-Tank" => Color.Error,
+            "Laser" => Color.Tertiary,
+            "Precision" => Color.Tertiary,
+            "Electrical" => Color.Info,
+            "Gas" => Color.Success,
+            "Anti-Horde" => Color.Warning,
+            "Smoke" => Color.Dark,
+            "Mine" => Color.Error,
+            "Turret" => Color.Dark,
+            "Eagle" => Color.Info,
+            "Orbital" => Color.Error,
+            "Support" => Color.Tertiary,
+            _ => Color.Default
+        };
+    }
+
+    private class ItemChanceInfo
+    {
+        public string Name { get; set; } = string.Empty;
+        public Dictionary<string, decimal> Attributes { get; } = new();
+        public decimal BaseWeight { get; set; }
+        public decimal EffectiveWeight { get; set; }
+        public decimal SelectionChance { get; set; }
+    }
+
+}

@@ -1,11 +1,24 @@
 @page "/"
 @using HellBlaze.Components.Helldivers
+@using HellBlaze.Constants
 @using HellBlaze.Logic
 @using HellBlaze.Models
 @namespace HellBlaze.Components.Pages
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+
+
     <MudCard Class="mb-6 pa-4">
+
+        <MudGrid>
+            <MudItem xs="12">
+                <ChallengeOfTheDay OnChallengeActivated="ActivateDailyChallenge"/>
+            </MudItem>
+        </MudGrid>
+
+        <MudDivider Class="my-6"/>
+
+
         <MudGrid Spacing="2">
             @foreach (var player in State.Players)
             {
@@ -23,7 +36,7 @@
             {
                 <MudItem xs="12" sm="6" md="6" lg="3">
                     <MudPaper Class="pa-6 ma-2 d-flex justify-center align-center"
-                              Style="min-height: 250px; cursor: pointer;"
+                              Style="min-height: 250px; cursor: pointer; border-radius: 12px; border: 1px solid rgba(255, 229, 0, 0.6);"
                               @onclick="AddDiver">
                         <MudIcon Icon="@Icons.Material.Filled.PersonAdd" Size="Size.Large"/>
                     </MudPaper>
@@ -31,21 +44,283 @@
             }
         </MudGrid>
 
-        <MudDivider Class="my-6"/>
 
-        <MudGrid Class="mb-4">
+        <MudGrid Class="my-8"> <!-- Changed from mb-4 to my-8 for more space above and below -->
             <MudItem xs="12">
                 <MudButton Variant="Variant.Filled" Color="Color.Secondary"
                            FullWidth="true" Size="Size.Large"
+                           Class="helldivers-randomize-btn"
                            OnClick="RandomizeLoadouts">
                     RANDOMIZE SQUAD LOADOUTS
                 </MudButton>
             </MudItem>
         </MudGrid>
+
+
+        <MudGrid>
+            <MudItem xs="12" md="4">
+                <MudPaper Class="pa-4 mb-4 presets-container">
+                    <MudText Typo="Typo.h5" Class="mb-4">Quick Presets</MudText>
+
+                    <MudGrid>
+                        @foreach (var (presetType, presetInfo) in LoadoutPresets.GetAllPresets())
+                        {
+                            var colorClass = $"mud-{presetInfo.ButtonColor.ToString().ToLower()}";
+
+                            <MudItem xs="12">
+                                <MudButton Variant="Variant.Filled"
+                                           Color="@presetInfo.ButtonColor"
+                                           FullWidth="true"
+                                           Class="@($"helldivers-preset-btn {colorClass}")"
+                                           OnClick="@(() => ApplyPreset(presetType))">
+                                    <span>@presetInfo.DisplayName</span>
+                                    @if (!string.IsNullOrEmpty(presetInfo.Emoji))
+                                    {
+                                        <span class="preset-emoji">@presetInfo.Emoji</span>
+                                    }
+                                </MudButton>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudPaper>
+            </MudItem>
+
+
+            <MudItem xs="12" md="8">
+                <FactorsEditor @bind-Factors="CurrentFactors"/>
+                <MudExpansionPanel Class="about-panel mb-4">
+                    <TitleContent>
+                        <div class="d-flex align-center justify-space-between expansion-title">
+                            <MudText Typo="Typo.h6" Class="my-2">About HellBlaze</MudText>
+                        </div>
+                    </TitleContent>
+                    <ChildContent>
+                        <HellBlaze.Components.AboutCard
+                            Version="1.0"
+                            GitHubUrl="https://github.com/janLalawa/Hellblaze"
+                            LatestUpdateDate="May 8, 2025"
+                            LatestUpdateItems="@(new List<string>
+                                               {
+                                                   "Initial Commit"
+                                               })"
+                        />
+                    </ChildContent>
+                </MudExpansionPanel>
+
+
+            </MudItem>
+        </MudGrid>
     </MudCard>
 </MudContainer>
 
+@if (_isLoaded)
+{
+    <ItemChancesTable Items="@GameData.Stratagems" CurrentFactors="@CurrentFactors"/>
+}
+
+
+<style>
+
+    .about-panel {
+        background-color: rgba(10, 20, 30, 0.7) !important;
+        border: 1px solid rgba(48, 184, 211, 0.4) !important;
+        border-radius: 8px !important;
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+    }
+
+    .about-panel .expansion-title {
+        padding: 0 8px;
+    }
+
+    .about-panel .mud-expand-panel-header {
+        min-height: 56px;
+        background: linear-gradient(to bottom, rgba(13, 26, 38, 0.8), rgba(10, 18, 25, 0.9)) !important;
+        transition: all 0.3s ease;
+    }
+
+    .about-panel .mud-expand-panel-header:hover {
+        background: linear-gradient(to bottom, rgba(20, 35, 50, 0.8), rgba(15, 25, 35, 0.9)) !important;
+    }
+
+    .about-panel .mud-typography-h6 {
+        color: #FFE500;
+        text-shadow: 0 0 5px rgba(255, 229, 0, 0.5);
+        font-weight: bold;
+    }
+
+    .helldivers-randomize-btn {
+        position: relative;
+        background-color: transparent !important;
+        border: 2px solid rgba(255, 229, 0, 0.4) !important;
+        transition: all 0.5s ease-out;
+        overflow: hidden;
+        font-family: 'Orbitron', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 1.05em !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        padding: 14px 0 !important;
+        color: rgba(255, 229, 0, 0.9) !important;
+        background: linear-gradient(to bottom, rgba(30, 30, 30, 0.7), rgba(15, 15, 15, 0.8)) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08);
+        text-shadow: 0 0 5px rgba(255, 229, 0, 0.4);
+    }
+
+    .helldivers-randomize-btn:hover {
+        border-color: rgba(255, 229, 0, 0.7) !important;
+        box-shadow: 0 0 12px rgba(255, 229, 0, 0.3), inset 0 1px rgba(255, 255, 255, 0.12);
+        transform: translateY(-1px);
+        background: linear-gradient(to bottom, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9)) !important;
+        text-shadow: 0 0 6px rgba(255, 229, 0, 0.5);
+    }
+
+    .helldivers-randomize-btn:active {
+        transition: all 0.2s ease-out;
+        transform: translateY(1px);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .helldivers-randomize-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        transition: all 1.2s ease;
+    }
+
+    .helldivers-randomize-btn:hover::before {
+        left: 100%;
+    }
+
+    .helldivers-randomize-btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 80%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px
+        );
+        pointer-events: none;
+    }
+
+
+    .helldivers-preset-btn {
+        position: relative;
+        background-color: rgba(15, 25, 35, 0.9) !important;
+        border: 2px solid rgba(255, 229, 0, 0.6) !important;
+        transition: all 0.2s ease;
+        overflow: hidden;
+        font-family: 'Orbitron', sans-serif !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        margin-bottom: 12px !important;
+    }
+
+    .helldivers-preset-btn:hover {
+        transform: skew(-2deg) scale(1.02);
+        border-color: rgba(255, 229, 0, 0.9) !important;
+        box-shadow: 0 0 10px rgba(255, 229, 0, 0.3);
+    }
+
+    .helldivers-preset-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 80%);
+        pointer-events: none;
+    }
+
+    .helldivers-preset-btn .mud-button-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 5px;
+    }
+
+    .preset-emoji {
+        font-size: 1.2em;
+        margin-left: 8px;
+    }
+
+    .helldivers-preset-btn.mud-warning {
+        background: linear-gradient(to bottom, rgba(255, 152, 0, 0.2), rgba(180, 100, 0, 0.3)) !important;
+        border-color: rgba(255, 152, 0, 0.7) !important;
+    }
+
+    .helldivers-preset-btn.mud-success {
+        background: linear-gradient(to bottom, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.3)) !important;
+        border-color: rgba(76, 175, 80, 0.7) !important;
+    }
+
+    .helldivers-preset-btn.mud-error {
+        background: linear-gradient(to bottom, rgba(244, 67, 54, 0.2), rgba(198, 40, 40, 0.3)) !important;
+        border-color: rgba(244, 67, 54, 0.7) !important;
+    }
+
+    .helldivers-preset-btn.mud-info {
+        background: linear-gradient(to bottom, rgba(3, 169, 244, 0.2), rgba(2, 119, 189, 0.3)) !important;
+        border-color: rgba(3, 169, 244, 0.7) !important;
+    }
+
+    .helldivers-preset-btn.mud-tertiary {
+        background: linear-gradient(to bottom, rgba(156, 39, 176, 0.2), rgba(123, 31, 162, 0.3)) !important;
+        border-color: rgba(156, 39, 176, 0.7) !important;
+    }
+
+    .helldivers-preset-btn.mud-primary {
+        background: linear-gradient(to bottom, rgba(33, 150, 243, 0.2), rgba(25, 118, 210, 0.3)) !important;
+        border-color: rgba(33, 150, 243, 0.7) !important;
+    }
+
+    .helldivers-preset-btn.mud-dark {
+        background: linear-gradient(to bottom, rgba(66, 66, 66, 0.2), rgba(33, 33, 33, 0.3)) !important;
+        border-color: rgba(66, 66, 66, 0.7) !important;
+    }
+
+    .presets-container {
+        background-color: rgba(10, 20, 30, 0.7);
+        border: 1px solid rgba(48, 184, 211, 0.4);
+        border-radius: 8px;
+        padding: 16px;
+        backdrop-filter: blur(5px);
+    }
+
+    .presets-container .mud-typography-h5 {
+        color: #FFE500;
+        text-shadow: 0 0 5px rgba(255, 229, 0, 0.5);
+        margin-bottom: 16px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+</style>
+
+
+
 @code {
+    private Factors CurrentFactors { get; set; } = new();
+    private bool _isLoaded;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GameData.EnsureDataLoadedAsync();
+        _isLoaded = true;
+    }
 
     protected override void OnInitialized()
     {
@@ -85,19 +360,46 @@
     {
         var randomiser = new Randomiser(GameData);
 
-        var testFactors = new Factors
-        {
-            TurretFactor = 5.0m,
-            MaxAllowedDupesStratagems = 2,
-            MustIncludeSupportWeapon = true
-        };
-
-        var kits = randomiser.GetSquadKits(State, testFactors);
+        var kits = randomiser.GetSquadKits(State, CurrentFactors);
 
         foreach (var (player, kit) in State.Players.Zip(kits))
         {
             player.Kit = kit;
         }
+
+        Snackbar.Add("For Managed Democracy!");
+
+        StateHasChanged();
+    }
+
+    private void ApplyPreset(LoadoutPresets.PresetType preset)
+    {
+        CurrentFactors = LoadoutPresets.GetFactors(preset);
+
+        var (message, emoji) = LoadoutPresets.GetNotification(preset);
+        Snackbar.Add($"{message} {emoji}");
+
+        StateHasChanged();
+    }
+
+    private void ActivateDailyChallenge()
+    {
+        var today = DateTime.UtcNow.Date;
+        var seed = today.Year * 10000 + today.Month * 100 + today.Day;
+
+        CurrentFactors = LoadoutPresets.GetDailyChallengeFactors();
+
+        var seededRandomiser = new Randomiser(GameData, seed);
+
+        var kits = seededRandomiser.GetSquadKits(State, CurrentFactors);
+
+        foreach (var (player, kit) in State.Players.Zip(kits))
+        {
+            player.Kit = kit;
+        }
+
+        var (message, emoji) = LoadoutPresets.GetDailyChallengeNotification();
+        Snackbar.Add($"{message} {emoji}");
 
         StateHasChanged();
     }

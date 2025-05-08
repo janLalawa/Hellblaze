@@ -2,20 +2,215 @@
 @using HellBlaze.Models
 @inject GameData GameData
 
-<h1>Weapons Database</h1>
-
 @if (_isLoaded)
 {
-    <h2>Primary Weapons (@(GameData.PrimaryWeapons?.Count ?? 0))</h2>
-    @if (GameData.PrimaryWeapons != null)
-    {
-        <ul>
-            @foreach (var weapon in GameData.PrimaryWeapons)
+    <div class="weapon-grid">
+        <h2>Primary Weapons (@(GameData.PrimaryWeapons?.Count ?? 0))</h2>
+        <div class="weapon-container">
+            @if (GameData.PrimaryWeapons != null)
             {
-                <li>@weapon.Name (@weapon.Type) - AP: @weapon.AP</li>
+                @foreach (var weapon in GameData.PrimaryWeapons)
+                {
+                    <div class="weapon-card">
+                        <div class="weapon-header">
+                            <h4>@weapon.Name</h4>
+                        </div>
+                        <div class="weapon-body">
+                            <div class="weapon-details">
+                                <p><strong>Type:</strong> @weapon.Type</p>
+                                <p><strong>Warbond:</strong> @weapon.Warbond</p>
+                                <p><strong>AP:</strong> @weapon.AP</p>
+                            </div>
+
+                            <div class="weapon-stats">
+                                <h5>Combat Attributes</h5>
+                                <ul>
+                                    @if (weapon.Fire > 0)
+                                    {
+                                        <li>Fire: @weapon.Fire</li>
+                                    }
+                                    @if (weapon.Explosive > 0)
+                                    {
+                                        <li>Explosive: @weapon.Explosive</li>
+                                    }
+                                    @if (weapon.AntiTank > 0)
+                                    {
+                                        <li>Anti-Tank: @weapon.AntiTank</li>
+                                    }
+                                    @if (weapon.Laser > 0)
+                                    {
+                                        <li>Laser: @weapon.Laser</li>
+                                    }
+                                    @if (weapon.Precision > 0)
+                                    {
+                                        <li>Precision: @weapon.Precision</li>
+                                    }
+                                    @if (weapon.Electrical > 0)
+                                    {
+                                        <li>Electrical: @weapon.Electrical</li>
+                                    }
+                                    @if (weapon.Gas > 0)
+                                    {
+                                        <li>Gas: @weapon.Gas</li>
+                                    }
+                                    @if (weapon.Smoke > 0)
+                                    {
+                                        <li>Smoke: @weapon.Smoke</li>
+                                    }
+                                    @if (weapon.AntiHorde > 0)
+                                    {
+                                        <li>Anti-Horde: @weapon.AntiHorde</li>
+                                    }
+                                    @if (weapon.Support > 0)
+                                    {
+                                        <li>Support: @weapon.Support</li>
+                                    }
+                                </ul>
+                                <p><strong>Total Weight:</strong> @weapon.TotalWeight</p>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
-        </ul>
-    }
+        </div>
+
+        <h2>Secondary Weapons (@(GameData.SecondaryWeapons?.Count ?? 0))</h2>
+        <div class="weapon-container">
+            @if (GameData.SecondaryWeapons != null)
+            {
+                @foreach (var weapon in GameData.SecondaryWeapons)
+                {
+                    <div class="weapon-card">
+                        <div class="weapon-header">
+                            <h4>@weapon.Name</h4>
+                        </div>
+                        <div class="weapon-body">
+                            <div class="weapon-details">
+                                <p><strong>Type:</strong> @weapon.Type</p>
+                                <p><strong>Warbond:</strong> @weapon.Warbond</p>
+                                <p><strong>AP:</strong> @weapon.AP</p>
+                            </div>
+
+                            <div class="weapon-stats">
+                                <h5>Combat Attributes</h5>
+                                <ul>
+                                    @if (weapon.Fire > 0)
+                                    {
+                                        <li>Fire: @weapon.Fire</li>
+                                    }
+                                    @if (weapon.Explosive > 0)
+                                    {
+                                        <li>Explosive: @weapon.Explosive</li>
+                                    }
+                                    @if (weapon.AntiTank > 0)
+                                    {
+                                        <li>Anti-Tank: @weapon.AntiTank</li>
+                                    }
+                                    @if (weapon.Laser > 0)
+                                    {
+                                        <li>Laser: @weapon.Laser</li>
+                                    }
+                                    @if (weapon.Precision > 0)
+                                    {
+                                        <li>Precision: @weapon.Precision</li>
+                                    }
+                                    @if (weapon.Electrical > 0)
+                                    {
+                                        <li>Electrical: @weapon.Electrical</li>
+                                    }
+                                    @if (weapon.Gas > 0)
+                                    {
+                                        <li>Gas: @weapon.Gas</li>
+                                    }
+                                    @if (weapon.Smoke > 0)
+                                    {
+                                        <li>Smoke: @weapon.Smoke</li>
+                                    }
+                                    @if (weapon.AntiHorde > 0)
+                                    {
+                                        <li>Anti-Horde: @weapon.AntiHorde</li>
+                                    }
+                                    @if (weapon.Support > 0)
+                                    {
+                                        <li>Support: @weapon.Support</li>
+                                    }
+                                </ul>
+                                <p><strong>Total Weight:</strong> @weapon.TotalWeight</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <h2>Throwable Weapons (@(GameData.Throwables?.Count ?? 0))</h2>
+        <div class="weapon-container">
+            @if (GameData.Throwables != null)
+            {
+                @foreach (var throwable in GameData.Throwables)
+                {
+                    <div class="weapon-card">
+                        <div class="weapon-header">
+                            <h4>@throwable.Name</h4>
+                        </div>
+                        <div class="weapon-body">
+                            <div class="weapon-details">
+                                <p><strong>Warbond:</strong> @throwable.Warbond</p>
+                                <p><strong>Destroys Spawners:</strong> @(throwable.DestroysSpawners ? "Yes" : "No")</p>
+                            </div>
+
+                            <div class="weapon-stats">
+                                <h5>Combat Attributes</h5>
+                                <ul>
+                                    @if (throwable.Fire > 0)
+                                    {
+                                        <li>Fire: @throwable.Fire</li>
+                                    }
+                                    @if (throwable.Explosive > 0)
+                                    {
+                                        <li>Explosive: @throwable.Explosive</li>
+                                    }
+                                    @if (throwable.AntiTank > 0)
+                                    {
+                                        <li>Anti-Tank: @throwable.AntiTank</li>
+                                    }
+                                    @if (throwable.Laser > 0)
+                                    {
+                                        <li>Laser: @throwable.Laser</li>
+                                    }
+                                    @if (throwable.Precision > 0)
+                                    {
+                                        <li>Precision: @throwable.Precision</li>
+                                    }
+                                    @if (throwable.Electrical > 0)
+                                    {
+                                        <li>Electrical: @throwable.Electrical</li>
+                                    }
+                                    @if (throwable.Gas > 0)
+                                    {
+                                        <li>Gas: @throwable.Gas</li>
+                                    }
+                                    @if (throwable.Smoke > 0)
+                                    {
+                                        <li>Smoke: @throwable.Smoke</li>
+                                    }
+                                    @if (throwable.AntiHorde > 0)
+                                    {
+                                        <li>Anti-Horde: @throwable.AntiHorde</li>
+                                    }
+                                    @if (throwable.Support > 0)
+                                    {
+                                        <li>Support: @throwable.Support</li>
+                                    }
+                                </ul>
+                                <p><strong>Total Weight:</strong> @throwable.TotalWeight</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
 }
 else
 {
@@ -32,3 +227,100 @@ else
     }
 
 }
+
+<style>
+    .weapon-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .weapon-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .weapon-card {
+        border: 1px solid #444;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 300px;
+        background-color: #222;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .weapon-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .weapon-header {
+        padding: 12px 15px;
+        background-color: #333;
+        border-bottom: 2px solid #FFE500;
+    }
+
+    .weapon-header h4 {
+        margin: 0;
+        color: #FFE500;
+        font-weight: bold;
+    }
+
+    .weapon-body {
+        padding: 15px;
+    }
+
+    .weapon-details {
+        margin-bottom: 15px;
+    }
+
+    .weapon-details p {
+        margin: 5px 0;
+    }
+
+    .weapon-stats {
+        border-top: 1px solid #444;
+        padding-top: 10px;
+    }
+
+    .weapon-stats h5 {
+        color: #FFE500;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .weapon-stats ul {
+        list-style-type: none;
+        padding-left: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .weapon-stats ul li {
+        padding: 3px 0;
+        font-size: 14px;
+    }
+
+    .weapon-stats p {
+        margin: 12px 0 0 0;
+        padding-top: 8px;
+        border-top: 1px dashed #444;
+        font-weight: bold;
+    }
+
+    @@media (max-width: 1000px) {
+        .weapon-container {
+            justify-content: center;
+        }
+    }
+
+    @@media (max-width: 640px) {
+        .weapon-card {
+            width: 100%;
+        }
+    }
+
+</style>

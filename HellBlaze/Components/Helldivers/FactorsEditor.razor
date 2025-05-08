@@ -1,0 +1,272 @@
+@using HellBlaze.Models
+<MudPaper Class="pa-3 mb-3 factors-container">
+    <MudText Typo="Typo.h5" Class="mb-2">Randomisation Multipliers</MudText>
+
+    <MudGrid Spacing="2">
+        <MudItem xs="12">
+            <MudSlider @bind-Value="Factors.BaseFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Primary" Immediate="true" Class="py-1 helldivers-slider">
+                Base Weight (Increases total randomness compared to other factors): @Factors.BaseFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudSlider @bind-Value="Factors.MaxAllowedDupesStratagems" Min="0" Max="4" Step="1"
+                       Color="Color.Primary" Immediate="true" Class="py-1 helldivers-slider">
+                Max Duplicate Stratagems: @Factors.MaxAllowedDupesStratagems
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudGrid Spacing="0" Class="helldivers-checkbox-group">
+                <MudItem xs="4">
+                    <MudCheckBox T="bool" @bind-Value="Factors.OneBackpack" Dense="true"
+                                 Label="One Backpack" Color="Color.Primary" Class="helldivers-checkbox"/>
+                </MudItem>
+
+                <MudItem xs="4">
+                    <MudCheckBox T="bool" @bind-Value="Factors.OneSupportWeapon" Dense="true"
+                                 Label="One Support Weapon" Color="Color.Primary" Class="helldivers-checkbox"/>
+                </MudItem>
+
+                <MudItem xs="4">
+                    <MudCheckBox T="bool" @bind-Value="Factors.MustIncludeSupportWeapon" Dense="true"
+                                 Label="Must Include Support Weapon" Color="Color.Primary" Class="helldivers-checkbox"/>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudDivider Class="my-2 helldivers-divider"/>
+            <MudText Typo="Typo.subtitle1" Class="my-2 factor-section-title">Attribute Weight
+                Multipliers
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.ExplosiveFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Error" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Explosive: @Factors.ExplosiveFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.FireFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Warning" Immediate="true" Class="py-1 pl-md-2 helldivers-slider">
+                Fire: @Factors.FireFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.AntiTankFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Primary" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Anti-Tank: @Factors.AntiTankFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.LaserFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Tertiary" Immediate="true" Class="py-1 pl-md-2 helldivers-slider">
+                Laser: @Factors.LaserFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.PrecisionFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Primary" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Precision: @Factors.PrecisionFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.ElectricalFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Info" Immediate="true" Class="py-1 pl-md-2 helldivers-slider">
+                Electrical: @Factors.ElectricalFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.GasFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Success" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Gas: @Factors.GasFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.SmokeFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Success" Immediate="true" Class="py-1 pl-md-2 helldivers-slider">
+                Smoke: @Factors.SmokeFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.AntiHordeFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Primary" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Anti-Horde: @Factors.AntiHordeFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.MineFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Error" Immediate="true" Class="py-1 pl-md-2 helldivers-slider">
+                Mine: @Factors.MineFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.TurretFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Primary" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Turret: @Factors.TurretFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.EagleFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Primary" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Eagle: @Factors.EagleFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.OrbitalFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Error" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Orbital: @Factors.OrbitalFactor
+            </MudSlider>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudSlider @bind-Value="Factors.SupportFactor" Min="@StandardSliderMin" Max="@StandardSliderMax"
+                       Step="@StandardSliderStep"
+                       Color="Color.Tertiary" Immediate="true" Class="py-1 pr-md-2 helldivers-slider">
+                Support: @Factors.SupportFactor
+            </MudSlider>
+        </MudItem>
+
+    </MudGrid>
+</MudPaper>
+
+<style>
+    .factors-container {
+        background-color: rgba(10, 20, 30, 0.7) !important;
+        border: 1px solid rgba(48, 184, 211, 0.4) !important;
+        border-radius: 8px !important;
+        backdrop-filter: blur(5px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .factors-container:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 80%);
+        pointer-events: none;
+    }
+
+    .factors-container .mud-typography-h5 {
+        color: #FFE500;
+        text-shadow: 0 0 5px rgba(255, 229, 0, 0.5);
+        margin-bottom: 16px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .helldivers-slider .mud-slider-track {
+        height: 4px !important;
+    }
+
+    .helldivers-slider .mud-slider-thumb {
+        width: 20px;
+        height: 20px;
+        clip-path: polygon(
+            0 50%,
+            50% 0,
+            100% 50%,
+            50% 100%
+        );
+        border: 2px solid rgba(255, 229, 0, 0.7);
+        background-color: rgba(15, 25, 35, 0.9) !important;
+    }
+
+    .helldivers-slider .mud-slider-thumb:hover {
+        box-shadow: 0 0 5px rgba(255, 229, 0, 0.7);
+    }
+
+    .helldivers-slider .mud-slider-track-filled {
+        background-image: linear-gradient(to right, rgba(255, 229, 0, 0.5), rgba(255, 229, 0, 0.8)) !important;
+    }
+
+    .helldivers-slider .mud-slider-value {
+        font-family: 'Orbitron', sans-serif !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        font-weight: bold;
+    }
+
+    .helldivers-checkbox-group {
+        background-color: rgba(15, 25, 35, 0.6);
+        border: 1px solid rgba(255, 229, 0, 0.3);
+        border-radius: 4px;
+        padding: 10px 5px;
+        margin-top: 5px;
+    }
+
+    .helldivers-checkbox .mud-checkbox-checked .mud-checkbox-icon {
+        color: #FFE500 !important;
+    }
+
+    .helldivers-checkbox .mud-checkbox-checked {
+        color: #FFE500 !important;
+    }
+
+    .helldivers-checkbox .mud-checkbox-label {
+        color: rgba(255, 255, 255, 0.9);
+        font-family: 'Orbitron', sans-serif !important;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .helldivers-divider {
+        border-color: rgba(255, 229, 0, 0.4) !important;
+    }
+
+    .factor-section-title {
+        color: #30b8d3;
+        font-family: 'Orbitron', sans-serif !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(48, 184, 211, 0.5);
+    }
+</style>
+
+
+@code {
+    [Parameter] public Factors Factors { get; set; } = new();
+
+    [Parameter] public EventCallback<Factors> FactorsChanged { get; set; }
+
+    private const decimal StandardSliderMin = 0;
+    private const decimal StandardSliderMax = 10;
+    private const decimal StandardSliderStep = 0.1m;
+}

@@ -5,12 +5,14 @@ namespace HellBlaze.Logic;
 public class Randomiser
 {
     private readonly GameData _gameData;
-    private readonly Random _random = new();
+    private readonly Random _random;
 
-    public Randomiser(GameData gameData)
+    public Randomiser(GameData gameData, int? seed = null)
     {
         _gameData = gameData;
+        _random = seed.HasValue ? new Random(seed.Value) : new Random();
     }
+
 
     private decimal CalculateWeight(Stratagem stratagem, Factors factors)
     {
@@ -48,6 +50,15 @@ public class Randomiser
 
         if (factors.MineFactor > 0 && stratagem.Mine > 0)
             weight += stratagem.Mine * factors.MineFactor;
+
+        if (factors.EagleFactor > 0 && stratagem.Eagle > 0)
+            weight += stratagem.Eagle * factors.EagleFactor;
+
+        if (factors.OrbitalFactor > 0 && stratagem.Orbital > 0)
+            weight += stratagem.Orbital * factors.OrbitalFactor;
+
+        if (factors.SupportFactor > 0 && stratagem.Support > 0)
+            weight += stratagem.Support * factors.SupportFactor;
 
         return weight;
     }
@@ -122,6 +133,9 @@ public class Randomiser
             if (factors.AntiHordeFactor > 0 && weapon.AntiHorde > 0)
                 weight += weapon.AntiHorde * factors.AntiHordeFactor;
 
+            if (factors.SupportFactor > 0 && weapon.Support > 0)
+                weight += weapon.Support * factors.SupportFactor;
+
             return weight;
         });
     }
@@ -158,6 +172,9 @@ public class Randomiser
 
             if (factors.AntiHordeFactor > 0 && throwable.AntiHorde > 0)
                 weight += throwable.AntiHorde * factors.AntiHordeFactor;
+
+            if (factors.SupportFactor > 0 && throwable.Support > 0)
+                weight += throwable.Support * factors.SupportFactor;
 
             return weight;
         });
