@@ -376,26 +376,19 @@
     {
         if (!string.IsNullOrWhiteSpace(_editName) && Diver != null)
         {
-            // Store old name
             var oldName = Diver.Name;
-        
-            // Update to new name
             Diver.Name = _editName;
 
-            // Check if warbonds exist for the new name
             var playerKey = GetStorageKey(Diver.Name);
             var warbondsJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", playerKey);
 
             if (string.IsNullOrEmpty(warbondsJson))
             {
-                // If no warbonds exist for new name, reset the disabled warbonds
                 Diver.DisabledWarbonds = new HashSet<string>();
-                // Then save the empty set to storage
                 SaveWarbondsToStorage();
             }
             else
             {
-                // If warbonds exist for new name, load them
                 await LoadWarbondsFromStorage();
             }
         }
