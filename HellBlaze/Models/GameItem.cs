@@ -29,7 +29,7 @@ public class Weapon : GameItem
 public class Stratagem : GameItem
 {
     [JsonPropertyName("icon")] public string? Icon { get; set; }
-    [JsonPropertyName("backpack")] public bool Backpack { get; set; }
+    [JsonPropertyName("backpack")] public bool Backpack { get; set; } = false;
     [JsonPropertyName("support_weapon")] public bool SupportWeapon { get; set; }
     [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
     [JsonPropertyName("explosive")] public decimal Explosive { get; set; } = 0;

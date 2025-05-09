@@ -2,16 +2,9 @@ using HellBlaze.Models;
 
 namespace HellBlaze.Logic;
 
-public class Randomiser
+public class Randomiser(GameData gameData, int? seed = null)
 {
-    private readonly GameData _gameData;
-    private readonly Random _random;
-
-    public Randomiser(GameData gameData, int? seed = null)
-    {
-        _gameData = gameData;
-        _random = seed.HasValue ? new Random(seed.Value) : new Random();
-    }
+    private readonly Random _random = seed.HasValue ? new Random(seed.Value) : new Random();
 
 
     private decimal CalculateWeight(Stratagem stratagem, Factors factors)
@@ -63,18 +56,17 @@ public class Randomiser
         return weight;
     }
 
-    public T GetWeightedRandomItem<T>(IEnumerable<T> items, Func<T, decimal> weightSelector)
+    private T GetWeightedRandomItem<T>(IEnumerable<T> items, Func<T, decimal> weightSelector)
     {
         var itemList = items.ToList();
         if (itemList.Count == 0)
-            return default;
+            return default!;
 
         decimal totalWeight = 0;
         var weights = new List<decimal>();
 
-        foreach (var item in itemList)
+        foreach (var weight in itemList.Select(weightSelector))
         {
-            var weight = weightSelector(item);
             weights.Add(weight);
             totalWeight += weight;
         }
@@ -95,12 +87,12 @@ public class Randomiser
         return itemList.Last();
     }
 
-    public Stratagem GetRandomStratagem(Factors factors, List<Stratagem> availableStratagems)
+    private Stratagem GetRandomStratagem(Factors factors, List<Stratagem> availableStratagems)
     {
         return GetWeightedRandomItem(availableStratagems, stratagem => CalculateWeight(stratagem, factors));
     }
 
-    public Weapon GetRandomWeapon<T>(Factors factors, List<T> weapons) where T : Weapon
+    private Weapon GetRandomWeapon<T>(Factors factors, List<T> weapons) where T : Weapon
     {
         return GetWeightedRandomItem(weapons, weapon =>
         {
@@ -140,7 +132,7 @@ public class Randomiser
         });
     }
 
-    public Throwable GetRandomThrowable(Factors factors, List<Throwable> throwables)
+    private Throwable GetRandomThrowable(Factors factors, List<Throwable> throwables)
     {
         return GetWeightedRandomItem(throwables, throwable =>
         {
@@ -180,24 +172,24 @@ public class Randomiser
         });
     }
 
-    public Armor GetRandomArmor()
+    private Armor GetRandomArmor()
     {
-        if (_gameData.Armors == null || _gameData.Armors.Count == 0)
+        if (gameData.Armors.Count == 0)
             return new Armor();
 
-        var randomIndex = _random.Next(_gameData.Armors.Count);
-        return _gameData.Armors[randomIndex];
+        var randomIndex = _random.Next(gameData.Armors.Count);
+        return gameData.Armors[randomIndex];
     }
 
-    public Booster? GetRandomBooster(HashSet<string> usedBoosters, HashSet<string>? disabledWarbonds = null)
+    private Booster? GetRandomBooster(HashSet<string> usedBoosters, HashSet<string>? disabledWarbonds = null)
     {
-        if (_gameData.Boosters == null || _gameData.Boosters.Count == 0)
+        if (gameData.Boosters.Count == 0)
             return null;
 
-        var availableBoosters = _gameData.Boosters
-                                         .Where(b => !usedBoosters.Contains(b.Name) &&
-                                                     (disabledWarbonds == null || !disabledWarbonds.Contains(b.Warbond)))
-                                         .ToList();
+        var availableBoosters = gameData.Boosters
+                                        .Where(b => !usedBoosters.Contains(b.Name) &&
+                                                    (disabledWarbonds == null || !disabledWarbonds.Contains(b.Warbond)))
+                                        .ToList();
 
         if (availableBoosters.Count == 0)
             return null;
@@ -207,21 +199,21 @@ public class Randomiser
     }
 
 
-    public Kit? GetRandomKit(Factors factors, bool isReady = false, List<Stratagem>? excludedStratagems = null, HashSet<string>? usedBoosters = null, HashSet<string>? disabledWarbonds = null)
+    private Kit? GetRandomKit(Factors factors, bool isReady = false, List<Stratagem>? excludedStratagems = null, HashSet<string>? usedBoosters = null, HashSet<string>? disabledWarbonds = null)
     {
         if (isReady) return null;
 
-        var availablePrimaries = _gameData.PrimaryWeapons
-                                          .Where(w => disabledWarbonds == null || !disabledWarbonds.Contains(w.Warbond))
-                                          .ToList();
+        var availablePrimaries = gameData.PrimaryWeapons
+                                         .Where(w => disabledWarbonds == null || !disabledWarbonds.Contains(w.Warbond))
+                                         .ToList();
 
-        var availableSecondaries = _gameData.SecondaryWeapons
-                                            .Where(w => disabledWarbonds == null || !disabledWarbonds.Contains(w.Warbond))
-                                            .ToList();
-
-        var availableThrowables = _gameData.Throwables
-                                           .Where(t => disabledWarbonds == null || !disabledWarbonds.Contains(t.Warbond))
+        var availableSecondaries = gameData.SecondaryWeapons
+                                           .Where(w => disabledWarbonds == null || !disabledWarbonds.Contains(w.Warbond))
                                            .ToList();
+
+        var availableThrowables = gameData.Throwables
+                                          .Where(t => disabledWarbonds == null || !disabledWarbonds.Contains(t.Warbond))
+                                          .ToList();
 
         var kit = new Kit
         {
@@ -233,17 +225,15 @@ public class Randomiser
 
         if (usedBoosters != null)
         {
-            var availableBoosters = usedBoosters != null
-                ? new HashSet<string>(usedBoosters)
-                : new HashSet<string>();
+            var availableBoosters = new HashSet<string>(usedBoosters);
 
             kit.Booster = GetRandomBooster(availableBoosters, disabledWarbonds);
-            if (kit.Booster != null) usedBoosters?.Add(kit.Booster.Name);
+            if (kit.Booster != null) usedBoosters.Add(kit.Booster.Name);
         }
 
-        var availableStratagems = _gameData.Stratagems
-                                           .Where(s => disabledWarbonds == null || !disabledWarbonds.Contains(s.Warbond))
-                                           .ToList();
+        var availableStratagems = gameData.Stratagems
+                                          .Where(s => disabledWarbonds == null || !disabledWarbonds.Contains(s.Warbond))
+                                          .ToList();
 
         if (excludedStratagems != null)
             foreach (var excluded in excludedStratagems)
@@ -289,10 +279,10 @@ public class Randomiser
 
     private void EnsureSupportWeapon(Kit kit, Factors factors, HashSet<string>? disabledWarbonds)
     {
-        var supportWeapons = _gameData.Stratagems
-                                      .Where(s => s.SupportWeapon &&
-                                                  (disabledWarbonds == null || !disabledWarbonds.Contains(s.Warbond)))
-                                      .ToList();
+        var supportWeapons = gameData.Stratagems
+                                     .Where(s => s.SupportWeapon &&
+                                                 (disabledWarbonds == null || !disabledWarbonds.Contains(s.Warbond)))
+                                     .ToList();
 
         if (supportWeapons.Count == 0)
             return;
@@ -301,10 +291,10 @@ public class Randomiser
 
         var replaceableSlots = new List<int>();
 
-        if (!factors.OneBackpack || kit.Stratagem1?.Backpack != true) replaceableSlots.Add(0);
-        if (!factors.OneBackpack || kit.Stratagem2?.Backpack != true) replaceableSlots.Add(1);
-        if (!factors.OneBackpack || kit.Stratagem3?.Backpack != true) replaceableSlots.Add(2);
-        if (!factors.OneBackpack || kit.Stratagem4?.Backpack != true) replaceableSlots.Add(3);
+        if (!factors.OneBackpack || kit.Stratagem1.Backpack != true) replaceableSlots.Add(0);
+        if (!factors.OneBackpack || kit.Stratagem2.Backpack != true) replaceableSlots.Add(1);
+        if (!factors.OneBackpack || kit.Stratagem3.Backpack != true) replaceableSlots.Add(2);
+        if (!factors.OneBackpack || kit.Stratagem4.Backpack != true) replaceableSlots.Add(3);
 
         if (replaceableSlots.Count <= 0) return;
 
@@ -328,7 +318,7 @@ public class Randomiser
 
         foreach (var player in state.Players)
         {
-            List<Stratagem> excludedStratagems = null;
+            List<Stratagem>? excludedStratagems = null;
 
             if (factors.MaxAllowedDupesStratagems > 0)
             {
@@ -337,7 +327,7 @@ public class Randomiser
                 foreach (var entry in stratagemCounts)
                 {
                     if (entry.Value < factors.MaxAllowedDupesStratagems) continue;
-                    var stratagem = _gameData.Stratagems.FirstOrDefault(s => s.Name == entry.Key);
+                    var stratagem = gameData.Stratagems.FirstOrDefault(s => s.Name == entry.Key);
                     if (stratagem != null) excludedStratagems.Add(stratagem);
                 }
             }
@@ -349,7 +339,7 @@ public class Randomiser
                 usedBoosters,
                 player.DisabledWarbonds) ?? player.Kit;
 
-            if (player.IsReady && player.Kit?.Booster != null)
+            if (player is { IsReady: true, Kit.Booster: not null })
                 usedBoosters.Add(player.Kit.Booster.Name);
 
             kits.Add(kit);

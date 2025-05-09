@@ -13,13 +13,13 @@ public class GameData
         _environment = environment;
     }
 
-    public List<Weapon>? PrimaryWeapons { get; private set; }
-    public List<Weapon>? SecondaryWeapons { get; private set; }
-    public List<Stratagem>? Stratagems { get; private set; }
-    public List<Throwable>? Throwables { get; private set; }
-    public List<Rank>? Ranks { get; private set; }
-    public List<Armor>? Armors { get; private set; }
-    public List<Booster>? Boosters { get; private set; }
+    public List<Weapon> PrimaryWeapons { get; private set; } = [];
+    public List<Weapon> SecondaryWeapons { get; private set; } = [];
+    public List<Stratagem> Stratagems { get; private set; } = [];
+    public List<Throwable> Throwables { get; private set; } = [];
+    public List<Rank> Ranks { get; private set; } = [];
+    public List<Armor> Armors { get; private set; } = [];
+    public List<Booster> Boosters { get; private set; } = [];
 
     public async Task EnsureDataLoadedAsync()
     {
@@ -49,25 +49,25 @@ public class GameData
         };
 
         PrimaryWeapons = await LoadJsonAsync<PrimaryWeaponsData>("json/primary.json", options)
-            .ContinueWith(t => t.Result?.Primary);
+            .ContinueWith(t => t.Result.Primary);
 
         SecondaryWeapons = await LoadJsonAsync<SecondaryWeaponsData>("json/secondary.json", options)
-            .ContinueWith(t => t.Result?.Secondary);
+            .ContinueWith(t => t.Result.Secondary);
 
         Stratagems = await LoadJsonAsync<StratagemsData>("json/stratagems.json", options)
-            .ContinueWith(t => t.Result?.Stratagems);
+            .ContinueWith(t => t.Result.Stratagems);
 
         Throwables = await LoadJsonAsync<ThrowablesData>("json/throwable.json", options)
-            .ContinueWith(t => t.Result?.Throwable);
+            .ContinueWith(t => t.Result.Throwable);
 
         Ranks = await LoadJsonAsync<RanksData>("json/ranks.json", options)
-            .ContinueWith(t => t.Result?.Ranks);
+            .ContinueWith(t => t.Result.Ranks);
 
         Armors = await LoadJsonAsync<ArmorData>("json/armour.json", options)
-            .ContinueWith(t => t.Result?.Armors);
+            .ContinueWith(t => t.Result.Armors);
 
         Boosters = await LoadJsonAsync<BoosterData>("json/booster.json", options)
-            .ContinueWith(t => t.Result?.Boosters);
+            .ContinueWith(t => t.Result.Boosters);
     }
 
     private async Task<T> LoadJsonAsync<T>(string path, JsonSerializerOptions options)
