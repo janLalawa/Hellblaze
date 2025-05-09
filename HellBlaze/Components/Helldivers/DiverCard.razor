@@ -312,7 +312,7 @@
     [Inject] private State State { get; set; } = null!;
     [Inject] private IJSRuntime JSRuntime { get; set; }
 
-    private readonly List<string> AvailableWarbonds = new();
+    private List<string> AvailableWarbonds = new();
     private bool _isEditingName;
     private string _editName = "";
     private bool _jsInteropReady;
@@ -339,7 +339,7 @@
     {
         try
         {
-            var playerKey = $"helldiver_warbonds_{Diver.Name}";
+            var playerKey = GetStorageKey(Diver.Name);
             var warbondsJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", playerKey);
 
             if (!string.IsNullOrEmpty(warbondsJson))
@@ -350,10 +350,11 @@
                     Diver.DisabledWarbonds = disabledWarbonds;
                 }
             }
+
+            AvailableWarbonds = GetUniqueWarbonds();
         }
         catch (Exception ex)
         {
-            // Handle error, possibly with a silent fail since this is just loading preferences
             Console.WriteLine($"Error loading warbonds: {ex.Message}");
         }
     }
@@ -375,11 +376,28 @@
     {
         if (!string.IsNullOrWhiteSpace(_editName) && Diver != null)
         {
+            // Store old name
+            var oldName = Diver.Name;
+        
+            // Update to new name
             Diver.Name = _editName;
 
-            await LoadWarbondsFromStorage();
+            // Check if warbonds exist for the new name
+            var playerKey = GetStorageKey(Diver.Name);
+            var warbondsJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", playerKey);
 
-            SaveWarbondsToStorage();
+            if (string.IsNullOrEmpty(warbondsJson))
+            {
+                // If no warbonds exist for new name, reset the disabled warbonds
+                Diver.DisabledWarbonds = new HashSet<string>();
+                // Then save the empty set to storage
+                SaveWarbondsToStorage();
+            }
+            else
+            {
+                // If warbonds exist for new name, load them
+                await LoadWarbondsFromStorage();
+            }
         }
 
         _isEditingName = false;
