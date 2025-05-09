@@ -729,7 +729,7 @@
     {
       "name": "Hellbomb Portable",
       "icon": "Hellbomb Portable.svg",
-      "backpack": false,
+      "backpack": true,
       "support_weapon": false,
       "category": "supply",
       "warbond": "Servants of Freedom",
