@@ -21,6 +21,90 @@
     </section>
 
     <section class="about-section">
+        <h2>How it Works</h2>
+        <h3>Weighting System</h3>
+        <p>
+            HellBlaze works by generating a randomised loadout based on JSON data that has been built specifically for
+            this project.
+            If you check out the <a href="/stratagems" class="link">Stratagems</a> or <a href="/weapons" class="link">Weapons</a>
+            pages, you'll see that the data is
+            represented over there.
+        </p>
+        <p>
+            It uses a weighting system. So if we do not apply any multipliers then we'll have an equal chance for
+            every stratagem to show up.
+            If we add, say, a 5x multiplier for fire, then the randomiser will add the fire weight * fire multiplier to
+            the total weight.
+            This means that the fire stratagem will be more likely to show up.
+        </p>
+        <p>
+            That weighting system will work with anything since it's all just based on the higher weights meaning
+            something is more likely.
+            This does mean that if you have a stratagem that is explosive, fire-based, and anti-tank then you add 5x
+            multipliers for each, you will get that stratagem showing up a lot.
+            This is intended behaviour and means that your loadout will reflect the sliders as closely as possible while
+            remaining random :)
+        </p>
+        <MudDivider/>
+        <h3>
+            Base Weight
+        </h3>
+        <p>
+            Note that a base weight is added as well. Remember that the higher a weight, the more likely something is to
+            show up?
+            So if we add a 2x fire multiplier plus a base weight of 10, we're still going to get very random results.
+            You can imagine that every
+            stratagem will have a weight of 10 and the fire stratagems will be a weight of 12.
+        </p>
+        <p>
+            This means that if you have a set of sliders that you like, you can fiddle with the base value to increase
+            total randomness. It's literally just added onto the end of the calculation for weights.
+        </p>
+        <MudDivider/>
+        <h3>Armour</h3>
+        <p>
+            Since Arrowhead provide armour in the super store, the tool does not distinguish between armour based on
+            your warbond.
+            Instead, it will randomly pick any passive. If you just don't own that type of armour, I recommend just
+            picking something fun and different.
+        </p>
+        <MudDivider/>
+        <h3>Daily Challenge</h3>
+        <p>
+            The daily challenge is a randomised loadout that is seeded and reset each UTC day. It's designed to be a fun
+            challenge to get you into the game without
+            having to think too hard about what you want to do. I encourage you to post your results on Reddit and share
+            it with your friends :)
+        </p>
+        <MudDivider/>
+        <h3>
+            Warbonds and Player Names
+        </h3>
+        <p>
+            You can select the warbonds that you own and the tool will attempt to save this against the player name in
+            your local
+            browser storage.
+            So if you set up your warbonds for a player called, say, "John Helldiver", then when you visit again and
+            type in that
+            name onto the card, it will set the warbonds again for you.
+        </p>
+        <p>
+            You can click into the name on each card to set it.
+        </p>
+        <MudDivider/>
+        <h3>
+            Political Affiliation
+        </h3>
+        <p>
+            HellBlaze proudly stands for MANAGED DEMOCRACY and SUPER EARTH. The server is regularly inspected by a
+            democracy officer.
+            If you use this tool then you agree that <span
+                class="trans-rights-text">trans rights are human rights</span>.
+
+        </p>
+    </section>
+
+    <section class="about-section">
         <h2>How to Use</h2>
         <div class="usage-steps">
             <div class="step">
@@ -267,6 +351,21 @@
         font-size: 0.9rem;
         border-top: 1px solid #444;
     }
+
+    .trans-rights-text {
+        background: linear-gradient(to right,
+        #55CDFC 0%,
+        #F7A8B8 25%,
+        #FFFFFF 50%,
+        #F7A8B8 75%,
+        #55CDFC 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        display: inline-block;
+    }
+
 
     @@media (min-width: 768px) {
         .usage-steps {

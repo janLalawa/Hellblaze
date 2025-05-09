@@ -1,12 +1,21 @@
 @page "/"
+@page "/loadout/{LoadoutCode}"
 @using HellBlaze.Components.Helldivers
 @using HellBlaze.Constants
 @using HellBlaze.Logic
 @using HellBlaze.Models
+@using HellBlaze.Services
 @namespace HellBlaze.Components.Pages
 
 <PageTitle>HellBlaze Randomiser</PageTitle>
 
+@if (!_isLoaded && !string.IsNullOrEmpty(LoadoutCode))
+{
+    <div class="loading-container">
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+        <MudText Align="Align.Center" Class="mt-4">Loading your Helldiver loadout... Stand by, citizen!</MudText>
+    </div>
+}
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
 
@@ -48,13 +57,23 @@
         </MudGrid>
 
 
-        <MudGrid Class="my-8"> <!-- Changed from mb-4 to my-8 for more space above and below -->
-            <MudItem xs="12">
+        <MudGrid Class="my-8">
+            <MudItem xs="10">
                 <MudButton Variant="Variant.Filled" Color="Color.Secondary"
                            FullWidth="true" Size="Size.Large"
                            Class="helldivers-randomize-btn"
                            OnClick="RandomizeLoadouts">
                     RANDOMIZE SQUAD LOADOUTS
+                </MudButton>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                           FullWidth="true" Size="Size.Large"
+                           Class="helldivers-share-btn"
+                           OnClick="ShareCurrentLoadout">
+                    <span>SHARE</span>
+                    <MudIcon Icon="@Icons.Material.Filled.Share" Class="ml-2"/>
                 </MudButton>
             </MudItem>
         </MudGrid>
@@ -123,6 +142,83 @@
 
 
 <style>
+
+    .loading-container {
+        padding: 40px;
+        max-width: 800px;
+        margin: 80px auto;
+        background-color: rgba(10, 20, 30, 0.7);
+        border: 1px solid rgba(48, 184, 211, 0.4);
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+    }
+
+
+    .helldivers-share-btn {
+        position: relative;
+        background-color: transparent !important;
+        border: 2px solid rgba(33, 150, 243, 0.4) !important;
+        transition: all 0.5s ease-out;
+        overflow: hidden;
+        font-family: 'Orbitron', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 1.05em !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        padding: 14px 0 !important;
+        color: #FFE500 !important;
+        background: linear-gradient(to bottom, rgba(30, 30, 30, 0.7), rgba(15, 15, 15, 0.8)) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08);
+        text-shadow: 0 0 5px rgba(243, 208, 33, 0.4);
+    }
+
+    .helldivers-share-btn:hover {
+        border-color: rgba(33, 150, 243, 0.7) !important;
+        box-shadow: 0 0 12px rgba(33, 150, 243, 0.3), inset 0 1px rgba(255, 255, 255, 0.12);
+        transform: translateY(-1px);
+        background: linear-gradient(to bottom, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9)) !important;
+        text-shadow: 0 0 6px rgba(33, 150, 243, 0.5);
+    }
+
+    .helldivers-share-btn:active {
+        transition: all 0.2s ease-out;
+        transform: translateY(1px);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .helldivers-share-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        transition: all 1.2s ease;
+    }
+
+    .helldivers-share-btn:hover::before {
+        left: 100%;
+    }
+
+    .helldivers-share-btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 80%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px
+        );
+        pointer-events: none;
+    }
+
 
     .about-panel {
         background-color: rgba(10, 20, 30, 0.7) !important;
@@ -316,8 +412,12 @@
 
 
 @code {
+    [Parameter] public string? LoadoutCode { get; set; }
+
     private Factors CurrentFactors { get; set; } = new();
     private bool _isLoaded;
+    private bool _jsInteropReady;
+    private string? _shareUrl;
 
     protected override async Task OnInitializedAsync()
     {
@@ -325,9 +425,91 @@
         _isLoaded = true;
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrEmpty(LoadoutCode) && _isLoaded)
+        {
+            await LoadSharedLoadout(LoadoutCode);
+        }
+    }
+
+
     protected override void OnInitialized()
     {
     }
+
+    private async Task LoadSharedLoadout(string code)
+    {
+        try
+        {
+            var sharedLoadout = LoadoutService.GetLoadout(code);
+            if (sharedLoadout == null)
+            {
+                Snackbar.Add("Loadout not found", Severity.Error);
+                return;
+            }
+
+            State.Players.Clear();
+            CurrentFactors = sharedLoadout.Factors;
+
+            foreach (var diverLoadout in sharedLoadout.DiverLoadouts)
+            {
+                var randomRank = await RandomRank.GetRandomRankAsync();
+
+                var diver = new Diver
+                {
+                    Name = diverLoadout.Name,
+                    Rank = randomRank,
+                    Kit = diverLoadout.Kit
+                };
+
+                State.Players.Add(diver);
+            }
+
+            Snackbar.Add("Loadout loaded successfully! For Super Earth!", Severity.Success);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error loading shared loadout: {ex.Message}", Severity.Error);
+        }
+    }
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsInteropReady = true;
+        }
+    }
+
+
+    private async Task ShareCurrentLoadout()
+    {
+        if (!_jsInteropReady)
+        {
+            Snackbar.Add("Sharing not ready yet, please try again in a moment", Severity.Warning);
+            return;
+        }
+
+        var sharedLoadout = new SharedLoadout
+        {
+            Factors = CurrentFactors,
+            DiverLoadouts = State.Players.Select(p => new SharedLoadout.DiverLoadout
+            {
+                Name = p.Name,
+                Kit = p.Kit
+            }).ToList()
+        };
+
+        var id = LoadoutService.SaveLoadout(sharedLoadout);
+        _shareUrl = $"{NavigationManager.BaseUri}loadout/{id}";
+
+        await JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", _shareUrl);
+
+        Snackbar.Add("Loadout link copied to clipboard! Share with your fellow Helldivers!", Severity.Info);
+    }
+
 
     private void RemovePlayer(Diver player)
     {
@@ -413,4 +595,8 @@
     [Inject] private State State { get; set; }
     [Inject] private GameData GameData { get; set; }
     [Inject] private RandomRank RandomRank { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private IJSRuntime JsRuntime { get; set; }
+    [Inject] private LoadoutService LoadoutService { get; set; }
+
 }

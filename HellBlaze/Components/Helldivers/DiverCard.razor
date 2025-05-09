@@ -304,20 +304,18 @@
 
 @code {
     [Parameter] public Diver Diver { get; set; } = new() { Rank = new Rank() };
-
     [Parameter] public bool IsReady { get; set; }
-
     [Parameter] public EventCallback OnRemove { get; set; }
-
     [Parameter] public EventCallback<bool> OnReadyStatusChanged { get; set; }
 
     [Inject] private GameData GameData { get; set; } = null!;
     [Inject] private State State { get; set; } = null!;
     [Inject] private IJSRuntime JSRuntime { get; set; }
 
-    private List<string> AvailableWarbonds = new();
+    private readonly List<string> AvailableWarbonds = new();
     private bool _isEditingName;
     private string _editName = "";
+    private bool _jsInteropReady;
     private ElementReference _nameInputReference;
 
     private string GetStorageKey(string name)
@@ -339,24 +337,24 @@
 
     private async Task LoadWarbondsFromStorage()
     {
-        if (string.IsNullOrEmpty(Diver.Name))
-            return;
-
-        var playerKey = GetStorageKey(Diver.Name);
-
-        var warbondsJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", playerKey);
-
-        if (!string.IsNullOrEmpty(warbondsJson))
+        try
         {
-            try
+            var playerKey = $"helldiver_warbonds_{Diver.Name}";
+            var warbondsJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", playerKey);
+
+            if (!string.IsNullOrEmpty(warbondsJson))
             {
-                Diver.DisabledWarbonds = JsonSerializer.Deserialize<HashSet<string>>(warbondsJson)
-                                         ?? new HashSet<string>();
+                var disabledWarbonds = JsonSerializer.Deserialize<HashSet<string>>(warbondsJson);
+                if (disabledWarbonds != null)
+                {
+                    Diver.DisabledWarbonds = disabledWarbonds;
+                }
             }
-            catch
-            {
-                Diver.DisabledWarbonds = new HashSet<string>();
-            }
+        }
+        catch (Exception ex)
+        {
+            // Handle error, possibly with a silent fail since this is just loading preferences
+            Console.WriteLine($"Error loading warbonds: {ex.Message}");
         }
     }
 
@@ -418,10 +416,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        AvailableWarbonds = GetUniqueWarbonds();
+    }
 
-        if (!string.IsNullOrEmpty(Diver.Name))
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
         {
+            _jsInteropReady = true;
             await LoadWarbondsFromStorage();
         }
     }

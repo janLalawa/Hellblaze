@@ -1,6 +1,7 @@
 using HellBlaze.Components;
 using HellBlaze.Logic;
 using HellBlaze.Models;
+using HellBlaze.Services;
 using MudBlazor;
 using MudBlazor.Services;
 
@@ -13,6 +14,7 @@ builder.Services.AddMudServices(config => { config.SnackbarConfiguration.Positio
 builder.Services.AddScoped<GameData>();
 builder.Services.AddScoped<State>();
 builder.Services.AddScoped<RandomRank>();
+builder.Services.AddSingleton<LoadoutService>();
 
 
 var app = builder.Build();

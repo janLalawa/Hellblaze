@@ -107,3 +107,8 @@ html, body {
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
 }
+
+.link {
+    color: #e87d16;
+    font-weight: bold;
+}
