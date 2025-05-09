@@ -2,6 +2,8 @@
 @using HellBlaze.Models
 @inject GameData GameData
 
+<PageTitle>HellBlaze | Stratagems</PageTitle>
+
 @if (_isLoaded)
 {
     <h2>Stratagems (@(GameData.Stratagems?.Count ?? 0))</h2>

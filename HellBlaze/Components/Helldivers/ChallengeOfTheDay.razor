@@ -11,7 +11,7 @@
 @code {
     [Parameter] public EventCallback OnChallengeActivated { get; set; }
 
-    private string CountdownDisplay => GetTimeUntilEndOfDayUTC();
+    private string CountdownDisplay => GetTimeUntilEndOfDayUtc();
     private Timer? _timer;
 
     protected override void OnInitialized()
@@ -19,7 +19,7 @@
         _timer = new Timer(_ => { InvokeAsync(StateHasChanged); }, null, 0, 1000);
     }
 
-    private string GetTimeUntilEndOfDayUTC()
+    private string GetTimeUntilEndOfDayUtc()
     {
         var now = DateTime.UtcNow;
         var endOfDay = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, DateTimeKind.Utc).AddSeconds(1);

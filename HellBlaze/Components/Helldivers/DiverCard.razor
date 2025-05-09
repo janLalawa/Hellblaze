@@ -1,3 +1,4 @@
+@using System.Text.Json
 @using HellBlaze.Constants
 @using HellBlaze.Models
 @namespace HellBlaze.Components.Helldivers
@@ -9,7 +10,7 @@
     <MudCardHeader Class="player-header">
         <CardHeaderAvatar>
             <div class="avatar-container">
-                <MudImage Src="@(Diver?.Rank?.Icon ?? "images/ranks/CadetIcon.svg")"
+                <MudImage Src="@(Diver.Rank.Icon)"
                           ObjectFit="ObjectFit.Cover"
                           Style="width: 55px; height: 55px; background: transparent;"
                           Class="rounded-0"/>
@@ -29,10 +30,10 @@
                 }
                 else
                 {
-                    <MudText Typo="Typo.body1" Style="margin: 0;">@(Diver?.Name ?? "Player")</MudText>
+                    <MudText Typo="Typo.body1" Style="margin: 0;">@(Diver.Name)</MudText>
                 }
             </div>
-            <MudText Typo="Typo.body2" Style="margin: 0;">@(Diver?.Rank?.Name ?? "Cadet")</MudText>
+            <MudText Typo="Typo.body2" Style="margin: 0;">@(Diver.Rank.Name)</MudText>
         </CardHeaderContent>
     </MudCardHeader>
 
@@ -309,42 +310,87 @@
     [Parameter] public EventCallback OnRemove { get; set; }
 
     [Parameter] public EventCallback<bool> OnReadyStatusChanged { get; set; }
+
     [Inject] private GameData GameData { get; set; } = null!;
     [Inject] private State State { get; set; } = null!;
+    [Inject] private IJSRuntime JSRuntime { get; set; }
 
     private List<string> AvailableWarbonds = new();
     private bool _isEditingName;
     private string _editName = "";
     private ElementReference _nameInputReference;
 
+    private string GetStorageKey(string name)
+    {
+        var sanitizedName = string.IsNullOrEmpty(name) ? "unknown" : name.Replace(" ", "_").Replace(".", "_");
+        return $"hellblaze_player_warbonds_{sanitizedName}";
+    }
+
+    private void SaveWarbondsToStorage()
+    {
+        if (string.IsNullOrEmpty(Diver.Name))
+            return;
+
+        var playerKey = GetStorageKey(Diver.Name);
+        var warbondsJson = JsonSerializer.Serialize(Diver.DisabledWarbonds);
+
+        JSRuntime.InvokeVoidAsync("localStorage.setItem", playerKey, warbondsJson);
+    }
+
+    private async Task LoadWarbondsFromStorage()
+    {
+        if (string.IsNullOrEmpty(Diver.Name))
+            return;
+
+        var playerKey = GetStorageKey(Diver.Name);
+
+        var warbondsJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", playerKey);
+
+        if (!string.IsNullOrEmpty(warbondsJson))
+        {
+            try
+            {
+                Diver.DisabledWarbonds = JsonSerializer.Deserialize<HashSet<string>>(warbondsJson)
+                                         ?? new HashSet<string>();
+            }
+            catch
+            {
+                Diver.DisabledWarbonds = new HashSet<string>();
+            }
+        }
+    }
+
+
     private void StartEditing()
     {
         if (!_isEditingName)
         {
             _isEditingName = true;
-            _editName = Diver?.Name ?? "Player";
+            _editName = Diver.Name;
             StateHasChanged();
 
             InvokeAsync(async () => await _nameInputReference.FocusAsync());
         }
     }
 
-    private void SaveName()
+    private async Task SaveName()
     {
         if (!string.IsNullOrWhiteSpace(_editName) && Diver != null)
         {
             Diver.Name = _editName;
+
+            await LoadWarbondsFromStorage();
+
+            SaveWarbondsToStorage();
         }
 
         _isEditingName = false;
     }
 
+
     private string GetPlayerColor()
     {
-        var playerIndex = -1;
-        playerIndex = State.Players.IndexOf(Diver);
-
-        return playerIndex switch
+        return State.Players.IndexOf(Diver) switch
         {
             0 => HelldiversTheme.Colors.Player1,
             1 => HelldiversTheme.Colors.Player2,
@@ -355,53 +401,55 @@
     }
 
 
-    private void HandleKeyDown(KeyboardEventArgs args)
+    private async Task HandleKeyDown(KeyboardEventArgs args)
     {
-        if (args.Key == "Enter")
+        switch (args.Key)
         {
-            SaveName();
-        }
-        else if (args.Key == "Escape")
-        {
-            _isEditingName = false;
-            StateHasChanged();
+            case "Enter":
+                await SaveName();
+                break;
+            case "Escape":
+                _isEditingName = false;
+                StateHasChanged();
+                break;
         }
     }
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         AvailableWarbonds = GetUniqueWarbonds();
+
+        if (!string.IsNullOrEmpty(Diver.Name))
+        {
+            await LoadWarbondsFromStorage();
+        }
     }
+
 
     private List<string> GetUniqueWarbonds()
     {
         var warbonds = new HashSet<string>();
 
         if (GameData.PrimaryWeapons != null)
-            foreach (var item in GameData.PrimaryWeapons)
-                if (!string.IsNullOrEmpty(item.Warbond))
-                    warbonds.Add(item.Warbond);
+            foreach (var item in GameData.PrimaryWeapons.Where(item => !string.IsNullOrEmpty(item.Warbond)))
+                warbonds.Add(item.Warbond);
 
         if (GameData.SecondaryWeapons != null)
-            foreach (var item in GameData.SecondaryWeapons)
-                if (!string.IsNullOrEmpty(item.Warbond))
-                    warbonds.Add(item.Warbond);
+            foreach (var item in GameData.SecondaryWeapons.Where(item => !string.IsNullOrEmpty(item.Warbond)))
+                warbonds.Add(item.Warbond);
 
         if (GameData.Throwables != null)
-            foreach (var item in GameData.Throwables)
-                if (!string.IsNullOrEmpty(item.Warbond))
-                    warbonds.Add(item.Warbond);
+            foreach (var item in GameData.Throwables.Where(item => !string.IsNullOrEmpty(item.Warbond)))
+                warbonds.Add(item.Warbond);
 
         if (GameData.Stratagems != null)
-            foreach (var item in GameData.Stratagems)
-                if (!string.IsNullOrEmpty(item.Warbond))
-                    warbonds.Add(item.Warbond);
+            foreach (var item in GameData.Stratagems.Where(item => !string.IsNullOrEmpty(item.Warbond)))
+                warbonds.Add(item.Warbond);
 
         if (GameData.Boosters != null)
-            foreach (var item in GameData.Boosters)
-                if (!string.IsNullOrEmpty(item.Warbond))
-                    warbonds.Add(item.Warbond);
+            foreach (var item in GameData.Boosters.Where(item => !string.IsNullOrEmpty(item.Warbond)))
+                warbonds.Add(item.Warbond);
 
         return warbonds.ToList();
     }
@@ -412,6 +460,8 @@
             Diver.DisabledWarbonds.Add(warbond);
         else
             Diver.DisabledWarbonds.Remove(warbond);
+
+        SaveWarbondsToStorage();
     }
 
 
