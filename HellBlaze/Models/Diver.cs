@@ -3,7 +3,7 @@ namespace HellBlaze.Models;
 public class Diver
 {
     public string Name { get; set; } = "Player";
-    public Rank Rank { get; set; }
+    public required Rank Rank { get; set; }
     public bool IsReady { get; set; }
     public Kit Kit { get; set; } = new();
     public HashSet<string> DisabledWarbonds { get; set; } = new();

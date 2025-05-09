@@ -11,7 +11,7 @@ public class GameItem
 public class Weapon : GameItem
 {
     [JsonPropertyName("ap")] public decimal AP { get; set; }
-    [JsonPropertyName("type")] public string Type { get; set; }
+    [JsonPropertyName("type")] public string? Type { get; set; } = null;
     [JsonPropertyName("fire")] public decimal Fire { get; set; } = 0;
     [JsonPropertyName("precision")] public decimal Precision { get; set; } = 0;
     [JsonPropertyName("electrical")] public decimal Electrical { get; set; } = 0;
@@ -28,7 +28,7 @@ public class Weapon : GameItem
 
 public class Stratagem : GameItem
 {
-    [JsonPropertyName("icon")] public string Icon { get; set; }
+    [JsonPropertyName("icon")] public string? Icon { get; set; }
     [JsonPropertyName("backpack")] public bool Backpack { get; set; }
     [JsonPropertyName("support_weapon")] public bool SupportWeapon { get; set; }
     [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
@@ -82,32 +82,32 @@ public class Booster : GameItem
 
 public class ArmorData
 {
-    [JsonPropertyName("armors")] public List<Armor> Armors { get; set; }
+    [JsonPropertyName("armors")] public List<Armor> Armors { get; set; } = [];
 }
 
 public class BoosterData
 {
-    [JsonPropertyName("boosters")] public List<Booster> Boosters { get; set; }
+    [JsonPropertyName("boosters")] public List<Booster> Boosters { get; set; } = [];
 }
 
 public class PrimaryWeaponsData
 {
-    [JsonPropertyName("primary")] public List<Weapon> Primary { get; set; }
+    [JsonPropertyName("primary")] public List<Weapon> Primary { get; set; } = [];
 }
 
 public class SecondaryWeaponsData
 {
-    [JsonPropertyName("secondary")] public List<Weapon> Secondary { get; set; }
+    [JsonPropertyName("secondary")] public List<Weapon> Secondary { get; set; } = [];
 }
 
 public class StratagemsData
 {
-    [JsonPropertyName("stratagems")] public List<Stratagem> Stratagems { get; set; }
+    [JsonPropertyName("stratagems")] public List<Stratagem> Stratagems { get; set; } = [];
 }
 
 public class ThrowablesData
 {
-    [JsonPropertyName("throwable")] public List<Throwable> Throwable { get; set; }
+    [JsonPropertyName("throwable")] public List<Throwable> Throwable { get; set; } = [];
 }
 
 public class Rank
@@ -118,5 +118,5 @@ public class Rank
 
 public class RanksData
 {
-    [JsonPropertyName("ranks")] public List<Rank> Ranks { get; set; }
+    [JsonPropertyName("ranks")] public required List<Rank> Ranks { get; set; }
 }
