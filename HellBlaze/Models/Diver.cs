@@ -19,5 +19,5 @@ public class Kit
     public Stratagem Stratagem3 { get; set; } = new();
     public Stratagem Stratagem4 { get; set; } = new();
     public Armor Armor { get; set; } = new();
-    public Booster? Booster { get; set; } = new();
+    public Booster Booster { get; set; } = new();
 }
