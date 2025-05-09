@@ -27,10 +27,10 @@ public static class LoadoutPresets
         {
             PresetType.ILikeDots,
             new PresetInfo(
-                "I like DoTs",
+                "I like Damage over Time",
                 Color.Warning,
                 new Factors { FireFactor = 8, GasFactor = 8, TurretFactor = 1, OrbitalFactor = 2, MaxAllowedDupesStratagems = 2 },
-                "Fire team activated! Let's Burn Baby!",
+                "Throw it and run",
                 "🔥"
             )
         },
@@ -69,7 +69,7 @@ public static class LoadoutPresets
             new PresetInfo(
                 "Rammstein Concert",
                 Color.Tertiary,
-                new Factors { LaserFactor = 4, SmokeFactor = 2, AntiTankFactor = 3, FireFactor = 5, ExplosiveFactor = 3, MaxAllowedDupesStratagems = 2 },
+                new Factors { LaserFactor = 4, SmokeFactor = 2, AntiTankFactor = 3, FireFactor = 5, ExplosiveFactor = 3, SupportFactor = 2, MaxAllowedDupesStratagems = 2 },
                 "Wollt ihr das Bett in Flammen sehen?",
                 "🎸"
             )
@@ -79,7 +79,7 @@ public static class LoadoutPresets
             new PresetInfo(
                 "Mixed Loadout",
                 Color.Primary,
-                new Factors { AntiTankFactor = 4, AntiHordeFactor = 4, TurretFactor = 1, PrecisionFactor = 1.5m, ExplosiveFactor = 1, SupportFactor = 0.5m },
+                new Factors { AntiTankFactor = 4, AntiHordeFactor = 4, TurretFactor = 1, PrecisionFactor = 1.5m, ExplosiveFactor = 1, SupportFactor = 1.5m },
                 "Hopefully this one is good!",
                 "👌️"
             )
