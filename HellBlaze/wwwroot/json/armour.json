@@ -3,82 +3,98 @@
     {
       "name": "Advanced Filtration",
       "icon": "Advanced Filtration Armor Passive Icon.png",
-      "description": "Provides 80% resistance to gas damage and effects."
+      "description": "Provides 80% resistance to gas damage and effects.",
+      "warbond": "Chemical Agents"
     },
     {
       "name": "Democracy Protects",
       "icon": "Democracy Protects Armor Passive Icon.png",
-      "description": "50% chance to not die when taking lethal damage. Prevents all damage from bleeding if chest hemorrhages."
+      "description": "50% chance to not die when taking lethal damage. Prevents all damage from bleeding if chest hemorrhages.",
+      "warbond": "Base"
     },
     {
       "name": "Electrical Conduit",
       "icon": "Electrical Conduit Armor Passive Icon.png",
-      "description": "Provides 95% resistance to arc damage."
+      "description": "Provides 95% resistance to arc damage.",
+      "warbond": "Cutting Edge"
     },
     {
       "name": "Engineering Kit",
       "icon": "Engineering Kit Armor Passive Icon.png",
-      "description": "Further reduces recoil when crouching or prone by 30%. Increases initial inventory and holding capacity of grenades by +2."
+      "description": "Further reduces recoil when crouching or prone by 30%. Increases initial inventory and holding capacity of grenades by +2.",
+      "warbond": "Base"
     },
     {
       "name": "Extra Padding",
       "icon": "Extra Padding Armor Passive Icon.png",
-      "description": "Provides a higher armor rating."
+      "description": "Provides a higher armor rating.",
+      "warbond": "Base"
     },
     {
       "name": "Fortified",
       "icon": "Fortified Armor Passive Icon.png",
-      "description": "Further reduces recoil when crouching or prone by 30%. Provides 50% resistance to explosive damage."
+      "description": "Further reduces recoil when crouching or prone by 30%. Provides 50% resistance to explosive damage.",
+      "warbond": "Base"
     },
     {
       "name": "Inflammable",
       "icon": "Inflammable Armor Passive Icon.png",
-      "description": "Provides 75% resistance to fire, allowing bearer to rest assured in their inflammability."
+      "description": "Provides 75% resistance to fire, allowing bearer to rest assured in their inflammability.",
+      "warbond": "Freedoms Flame"
     },
     {
       "name": "Med-Kit",
       "icon": "Med-Kit Armor Passive Icon.png",
-      "description": "Increases initial inventory and holding capacity of stims by +2. Increases stim effect duration by 2.0s."
+      "description": "Increases initial inventory and holding capacity of stims by +2. Increases stim effect duration by 2.0s.",
+      "warbond": "Base"
     },
     {
       "name": "Peak Physique",
       "icon": "Peak Physique Armor Passive Icon.png",
-      "description": "Increases melee damage by 100%. Improves weapons handling with less drag on weapon movement."
+      "description": "Increases melee damage by 100%. Improves weapons handling with less drag on weapon movement.",
+      "warbond": "Viper Commandos"
     },
     {
       "name": "Scout",
       "icon": "Scout Armor Passive Icon.png",
-      "description": "Markers placed on the map will generate radar scans every 2.0s. Reduces range at which enemies can detect the wearer by 30%."
+      "description": "Markers placed on the map will generate radar scans every 2.0s. Reduces range at which enemies can detect the wearer by 30%.",
+      "warbond": "Base"
     },
     {
       "name": "Servo-Assisted",
       "icon": "Servo-Assisted Armor Passive Icon.png",
-      "description": "Increases throwing range by 30%. Provides +50% limb health."
+      "description": "Increases throwing range by 30%. Provides +50% limb health.",
+      "warbond": "Base"
     },
     {
       "name": "Unflinching",
       "icon": "Unflinching Armor Passive Icon.png",
-      "description": "Helps Prevent Helldivers from flinching when hit."
+      "description": "Helps Prevent Helldivers from flinching when hit.",
+      "warbond": "Truth Enforcers"
     },
     {
       "name": "Siege-Ready",
       "icon": "Siege-Ready Armor Passive Icon.png",
-      "description": "Increases reload speed of primary weapons by 30%. Increases ammo capacity of primary weapons by 20%."
+      "description": "Increases reload speed of primary weapons by 30%. Increases ammo capacity of primary weapons by 20%.",
+      "warbond": "Urban Legends"
     },
     {
       "name": "Acclimated",
       "icon": "Inflammable Armor Passive Icon.png",
-      "description": "Grants a 50% resistance to fire, gas, acid and arc damage."
+      "description": "Grants a 50% resistance to fire, gas, acid and arc damage.",
+      "warbond": "Super Store"
     },
     {
       "name": "Integrated Explosives",
       "icon": "Integrated Explosives Armor Passive Icon.png",
-      "description": "Armor explodes 1.5s after wearer dies."
+      "description": "Armor explodes 1.5s after wearer dies.",
+      "warbond": "Servants of Freedom"
     },
     {
       "name": "Gunslinger",
       "icon": "Gunslinger Armor Passive Icon.png",
-      "description": "Increases sidearms reload speed by 40%. Sidearm draw/holster speed increased by 50%. Sidearm recoil reduced by 70%."
+      "description": "Increases sidearms reload speed by 40%. Sidearm draw/holster speed increased by 50%. Sidearm recoil reduced by 70%.",
+      "warbond": "Borderline Justice"
     }
   ]
 }

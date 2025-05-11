@@ -172,14 +172,22 @@ public class Randomiser(GameData gameData, int? seed = null)
         });
     }
 
-    private Armor GetRandomArmor()
+    private Armor GetRandomArmor(HashSet<string>? disabledWarbonds = null)
     {
         if (gameData.Armors.Count == 0)
             return new Armor();
 
-        var randomIndex = _random.Next(gameData.Armors.Count);
-        return gameData.Armors[randomIndex];
+        var availableArmors = gameData.Armors
+                                      .Where(a => disabledWarbonds == null || !disabledWarbonds.Contains(a.Warbond))
+                                      .ToList();
+
+        if (availableArmors.Count == 0)
+            return new Armor();
+
+        var randomIndex = _random.Next(availableArmors.Count);
+        return availableArmors[randomIndex];
     }
+
 
     private Booster? GetRandomBooster(HashSet<string> usedBoosters, HashSet<string>? disabledWarbonds = null)
     {
@@ -220,7 +228,7 @@ public class Randomiser(GameData gameData, int? seed = null)
             Primary = GetRandomWeapon(factors, availablePrimaries),
             Secondary = GetRandomWeapon(factors, availableSecondaries),
             Throwable = GetRandomThrowable(factors, availableThrowables),
-            Armor = GetRandomArmor()
+            Armor = GetRandomArmor(disabledWarbonds)
         };
 
         if (usedBoosters != null)
