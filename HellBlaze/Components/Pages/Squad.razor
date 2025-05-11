@@ -11,10 +11,18 @@
 
 @if (!_isLoaded && !string.IsNullOrEmpty(LoadoutCode))
 {
-    <div class="loading-container">
-        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
-        <MudText Align="Align.Center" Class="mt-4">Loading your Helldiver loadout... Stand by, citizen!</MudText>
-    </div>
+    <OpenGraph
+        Title="HellBlaze Loadout"
+        Description="@($"Helldivers randomised loadout: {LoadoutCode}")"
+        ImageUrl="@($"{NavigationManager.BaseUri}api/loadoutimage/{LoadoutCode}")"
+        Url="@NavigationManager.Uri"/>
+}
+else
+{
+    <OpenGraph
+        Title="HellBlaze Randomiser"
+        Description="Randomise your Helldivers loadout"
+        Url="@NavigationManager.Uri"/>
 }
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">

@@ -1,0 +1,26 @@
+<PageTitle>@Title</PageTitle>
+<HeadContent>
+    <meta property="og:title" content="@Title"/>
+    <meta property="og:description" content="@Description"/>
+    <meta property="og:image" content="@ImageUrl"/>
+    <meta property="og:url" content="@Url"/>
+    <meta property="og:type" content="website"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+</HeadContent>
+
+@code {
+    [Parameter] public string Title { get; set; } = "HellBlaze Randomiser";
+    [Parameter] public string Description { get; set; } = "A loadout randomiser for Helldivers 2";
+    [Parameter] public string ImageUrl { get; set; } = "https://hellblaze.vargur.dev/images/hellblazeog.png";
+    [Parameter] public string Url { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(Url))
+        {
+            Url = NavigationManager.Uri;
+        }
+    }
+
+    [Inject] private NavigationManager NavigationManager { get; set; }
+}

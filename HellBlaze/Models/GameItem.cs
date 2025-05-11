@@ -28,7 +28,7 @@ public class Weapon : GameItem
 
 public class Stratagem : GameItem
 {
-    [JsonPropertyName("icon")] public string? Icon { get; set; }
+    [JsonPropertyName("icon")] public string Icon { get; set; } = "missingicon.svg";
     [JsonPropertyName("backpack")] public bool Backpack { get; set; } = false;
     [JsonPropertyName("support_weapon")] public bool SupportWeapon { get; set; }
     [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
@@ -75,7 +75,7 @@ public class Armor : GameItem
 
 public class Booster : GameItem
 {
-    [JsonPropertyName("icon")] public string Icon { get; set; } = string.Empty;
+    [JsonPropertyName("icon")] public string Icon { get; set; } = "missingbooster.svg";
     [JsonPropertyName("description")] public string Description { get; set; } = string.Empty;
     [JsonPropertyName("price")] public int Price { get; set; }
 }

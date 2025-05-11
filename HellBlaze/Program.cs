@@ -15,6 +15,7 @@ builder.Services.AddScoped<GameData>();
 builder.Services.AddScoped<State>();
 builder.Services.AddScoped<RandomRank>();
 builder.Services.AddSingleton<LoadoutService>();
+builder.Services.AddControllers();
 
 
 var app = builder.Build();
@@ -33,5 +34,6 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
    .AddInteractiveServerRenderMode();
+app.MapControllers();
 
 app.Run();

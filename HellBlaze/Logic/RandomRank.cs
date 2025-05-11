@@ -14,7 +14,6 @@ public class RandomRank
     public async Task<Rank> GetRandomRankAsync()
     {
         await _gameData.EnsureDataLoadedAsync();
-        if (_gameData.Ranks == null || _gameData.Ranks.Count == 0) return new Rank();
-        return _gameData.Ranks[new Random().Next(_gameData.Ranks.Count)];
+        return _gameData.Ranks.Count == 0 ? new Rank() : _gameData.Ranks[new Random().Next(_gameData.Ranks.Count)];
     }
 }

@@ -100,7 +100,7 @@
     },
     {
       "name": "Sample Extricator",
-      "icon": "Sample Extricator Booster.png",
+      "icon": "Sample Extricator Booster.svg",
       "description": "Large enemies now have a chance of dropping Samples on death. Capped at 10 drops per mission.",
       "warbond": "Borderline Justice",
       "price": 65

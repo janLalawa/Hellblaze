@@ -187,8 +187,8 @@ public class Randomiser(GameData gameData, int? seed = null)
             return null;
 
         var availableBoosters = gameData.Boosters
-                                        .Where(b => !usedBoosters.Contains(b.Name) &&
-                                                    (disabledWarbonds == null || !disabledWarbonds.Contains(b.Warbond)))
+                                        .Where(b => !usedBoosters.Contains(b.Name)
+                                                    && (disabledWarbonds == null || !disabledWarbonds.Contains(b.Warbond)))
                                         .ToList();
 
         if (availableBoosters.Count == 0)
