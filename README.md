@@ -2,7 +2,7 @@
 ![HellBlaze Logo](HellBlaze/wwwroot/images/logo256.png)
 
 
-![hellblaze.vargur.dev](https://hellblaze.vargur.dev)
+[hellblaze.vargur.dev](https://hellblaze.vargur.dev)
 
 
 HellBlaze is a randomisation tool that will let you create randomised loadouts to play with. Unlike other tools, HellBlaze features loadout style customisation and full-squad setups.
@@ -86,7 +86,7 @@ HellBlaze is a fan-made tool and is not affiliated with Arrowhead Game Studios o
 ## Acknowledgements
 
 - Helldivers 2 and related assets are property of Arrowhead Game Studios
-- ![Helldivers 2 SVGs](https://github.com/nvigneux/Helldivers-2-Stratagems-icons-svg)
+- [Helldivers 2 SVGs](https://github.com/nvigneux/Helldivers-2-Stratagems-icons-svg)
 
 ---
 
