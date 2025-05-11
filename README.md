@@ -86,6 +86,7 @@ HellBlaze is a fan-made tool and is not affiliated with Arrowhead Game Studios o
 ## Acknowledgements
 
 - Helldivers 2 and related assets are property of Arrowhead Game Studios
+- ![Helldivers 2 SVGs](https://github.com/nvigneux/Helldivers-2-Stratagems-icons-svg)
 
 ---
 
