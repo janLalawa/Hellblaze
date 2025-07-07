@@ -9,6 +9,14 @@ HellBlaze is a randomisation tool that will let you create randomised loadouts t
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E11EU4JG)
 
+## Latest Update
+
+- Added support for Force of Law and Masters of Ceremony
+- Fixed a bug where a weapon being unavailable (due to lack of warbonds selected) caused a null reference exception
+
+### Known Issues
+- Icons for the newest stratagems have a black background as a clean svg was not readily available
+
 
 --- 
 
