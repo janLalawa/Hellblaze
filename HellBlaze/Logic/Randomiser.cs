@@ -94,6 +94,8 @@ public class Randomiser(GameData gameData, int? seed = null)
 
     private Weapon GetRandomWeapon<T>(Factors factors, List<T> weapons) where T : Weapon
     {
+        if (weapons == null || weapons.Count == 0)
+            return new Weapon();
         return GetWeightedRandomItem(weapons, weapon =>
         {
             var weight = factors.BaseFactor;
@@ -134,6 +136,8 @@ public class Randomiser(GameData gameData, int? seed = null)
 
     private Throwable GetRandomThrowable(Factors factors, List<Throwable> throwables)
     {
+        if (throwables == null || throwables.Count == 0)
+            return new Throwable();
         return GetWeightedRandomItem(throwables, throwable =>
         {
             var weight = factors.BaseFactor;

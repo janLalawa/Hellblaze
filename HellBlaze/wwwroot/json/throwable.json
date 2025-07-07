@@ -9,7 +9,8 @@
       "smoke": 0,
       "gas": 1,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Frag (G-6)",
@@ -20,7 +21,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Impact (G-16)",
@@ -31,7 +33,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Incendiary (G-10)",
@@ -42,7 +45,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Incendiary Impact (G-13)",
@@ -64,7 +68,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 1
+      "support": 1,
+      "electrical": 0.5
     },
     {
       "name": "Thermite (G123)",
@@ -75,7 +80,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 1,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Dynamite (TED-63)",
@@ -86,7 +92,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "High Explosive (G-12)",
@@ -97,7 +104,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Seeker (G-50)",
@@ -108,7 +116,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Throwing Knife (K-2)",
@@ -119,7 +128,8 @@
       "smoke": 0,
       "gas": 0,
       "anti_tank": 0,
-      "support": 0
+      "support": 0,
+      "electrical": 0
     },
     {
       "name": "Smoke (G-3)",
@@ -130,7 +140,34 @@
       "smoke": 1,
       "gas": 0,
       "anti_tank": 0,
-      "support": 1
+      "support": 1,
+      "electrical": 0
+    },
+    {
+      "name": "G-142 Pyrotech",
+      "warbond": "Masters of Ceremony",
+      "destroys_spawners": true,
+      "electrical": 0,
+      "fire": 1,
+      "explosive": 0.2,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0,
+      "support": 0,
+      "electrical": 0
+    },
+    {
+      "name": "G-109 Urchin",
+      "warbond": "Masters of Ceremony",
+      "destroys_spawners": false,
+      "electrical": 1,
+      "fire": 1,
+      "explosive": 0.2,
+      "smoke": 0,
+      "gas": 0,
+      "anti_tank": 0,
+      "support": 1,
+      "electrical": 1
     }
   ]
 }

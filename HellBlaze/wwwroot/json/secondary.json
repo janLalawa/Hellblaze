@@ -164,6 +164,28 @@
       "laser": 0,
       "precision": 0,
       "support": 1
+    },
+    {
+      "name": "Saber (CQC-2)",
+      "ap": 3,
+      "type": "Melee",
+      "warbond": "Masters of Ceremony",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0,
+      "support": 0
+    },
+    {
+      "name": "Warrant (P-92)",
+      "ap": 3,
+      "type": "Melee",
+      "warbond": "Super Store",
+      "fire": 0,
+      "explosive": 0,
+      "laser": 0,
+      "precision": 0,
+      "support": 0
     }
   ]
 }

@@ -95,6 +95,18 @@
       "icon": "Gunslinger Armor Passive Icon.png",
       "description": "Increases sidearms reload speed by 40%. Sidearm draw/holster speed increased by 50%. Sidearm recoil reduced by 70%.",
       "warbond": "Borderline Justice"
+    },
+    {
+      "name": "Reinforced Epaulettes",
+      "icon": "Reinforced Epaulettes Passive Icon.png",
+      "description": "Increases reload speed of primary weapons by 30%. Gives wearer a 50% chance to avoid grievous limb injury. Increases melee damage by 50%.",
+      "warbond": "Masters of Ceremony"
+    },
+    {
+      "name": "Ballistic Padding",
+      "icon": "Ballistic Padding Passive Icon.png",
+      "description": "Provides 25% resistance to chest damage. Provides 25% resistance to explosive damage. Prevents all damage from bleeding if chest hemorrhages.",
+      "warbond": "Force of Law"
     }
   ]
 }

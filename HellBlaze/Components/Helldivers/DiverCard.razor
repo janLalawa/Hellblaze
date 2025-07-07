@@ -114,13 +114,13 @@
                          style="position: relative; width: 100%; height: 100%;">
                         <MudPaper Square="true"
                                   Style="aspect-ratio: 1/1; background-color: #222;">
-                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem3.Icon}")"
-                                      Alt="@Diver.Kit.Stratagem3.Name" ObjectFit="ObjectFit.Cover"
+                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem3?.Icon ?? "missingicon.svg"}")"
+                                      Alt="@(Diver.Kit.Stratagem3?.Name ?? "Unknown")" ObjectFit="ObjectFit.Cover"
                                       Style="width: 100%; height: 100%;"/>
                         </MudPaper>
-                        @if (_activeTooltip == Diver.Kit.Stratagem3.Name)
+                        @if (_activeTooltip == (Diver.Kit.Stratagem3?.Name ?? ""))
                         {
-                            <div class="custom-tooltip">@Diver.Kit.Stratagem3.Name</div>
+                            <div class="custom-tooltip">@(Diver.Kit.Stratagem3?.Name ?? "Unknown")</div>
                         }
                     </div>
                 </MudItem>
@@ -130,13 +130,13 @@
                          style="position: relative; width: 100%; height: 100%;">
                         <MudPaper Square="true"
                                   Style="aspect-ratio: 1/1; background-color: #222;">
-                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem4.Icon}")"
-                                      Alt="@Diver.Kit.Stratagem4.Name" ObjectFit="ObjectFit.Cover"
+                            <MudImage Src="@($"stratagems/{Diver.Kit.Stratagem4?.Icon ?? "missingicon.svg"}")"
+                                      Alt="@(Diver.Kit.Stratagem4?.Name ?? "Unknown")" ObjectFit="ObjectFit.Cover"
                                       Style="width: 100%; height: 100%;"/>
                         </MudPaper>
-                        @if (_activeTooltip == Diver.Kit.Stratagem4.Name)
+                        @if (_activeTooltip == (Diver.Kit.Stratagem4?.Name ?? ""))
                         {
-                            <div class="custom-tooltip">@Diver.Kit.Stratagem4.Name</div>
+                            <div class="custom-tooltip">@(Diver.Kit.Stratagem4?.Name ?? "Unknown")</div>
                         }
                     </div>
                 </MudItem>
@@ -147,13 +147,13 @@
                          style="position: relative; width: 100%; height: 100%;">
                         <MudPaper Square="true"
                                   Style="aspect-ratio: 1/1; background-color: #222;">
-                            <MudImage Src="@($"boosters/{Diver.Kit.Booster.Icon}")"
-                                      Alt="@Diver.Kit.Booster.Name" ObjectFit="ObjectFit.Cover"
+                            <MudImage Src="@($"boosters/{Diver.Kit.Booster?.Icon ?? "missingbooster.svg"}")"
+                                      Alt="@(Diver.Kit.Booster?.Name ?? "Unknown")" ObjectFit="ObjectFit.Cover"
                                       Style="width: 100%; height: 100%;"/>
                         </MudPaper>
-                        @if (_activeTooltip == Diver.Kit.Booster.Name)
+                        @if (_activeTooltip == (Diver.Kit.Booster?.Name ?? ""))
                         {
-                            <div class="custom-tooltip">@Diver.Kit.Booster.Name</div>
+                            <div class="custom-tooltip">@(Diver.Kit.Booster?.Name ?? "Unknown")</div>
                         }
                     </div>
                 </MudItem>

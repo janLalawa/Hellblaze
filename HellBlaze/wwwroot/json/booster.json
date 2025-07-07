@@ -104,6 +104,20 @@
       "description": "Large enemies now have a chance of dropping Samples on death. Capped at 10 drops per mission.",
       "warbond": "Borderline Justice",
       "price": 65
+    },
+    {
+      "name": "Stun Pods",
+      "icon": "Stun Pods Booster.svg",
+      "description": "Exposes Hellpod wiring upon surface contact, stunning any units in the vicinity of the drop site.",
+      "warbond": "Force of Law",
+      "price": 65
+    },
+    {
+      "name": "Sample Scanner",
+      "icon": "Sample Scanner Booster.svg",
+      "description": "The Sample scanner gives you a 15% chance to receive twice the Samples on sample pick up.",
+      "warbond": "Masters of Ceremony",
+      "price": 65
     }
   ]
 }

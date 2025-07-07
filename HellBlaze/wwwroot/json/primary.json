@@ -384,6 +384,28 @@
       "electrical": 0,
       "laser": 0,
       "explosive": 0
+    },
+    {
+      "name": "AR-32 Pacifier",
+      "ap": 3,
+      "type": "Assault Rifle",
+      "warbond": "Freedoms Flame",
+      "fire": 0,
+      "precision": 0,
+      "electrical": 0.3,
+      "laser": 0,
+      "explosive": 0
+    },
+    {
+      "name": "R-2 Amendment",
+      "ap": 2,
+      "type": "Marksman Rifle",
+      "warbond": "Freedoms Flame",
+      "fire": 0,
+      "precision": 1,
+      "electrical": 0,
+      "laser": 0,
+      "explosive": 0
     }
   ]
 }
